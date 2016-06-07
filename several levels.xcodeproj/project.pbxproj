@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		79231EF91D0715FD0068348A /* LatestPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79231EF81D0715FD0068348A /* LatestPostsTableViewController.swift */; };
+		79231EFB1D0716A70068348A /* LatestPostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79231EFA1D0716A70068348A /* LatestPostsTableViewCell.swift */; };
 		79FFC15C1D06363B0038E099 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FFC15B1D06363B0038E099 /* AppDelegate.swift */; };
 		79FFC1611D06363B0038E099 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79FFC15F1D06363B0038E099 /* Main.storyboard */; };
 		79FFC1631D06363B0038E099 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79FFC1621D06363B0038E099 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		79231EF81D0715FD0068348A /* LatestPostsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestPostsTableViewController.swift; sourceTree = "<group>"; };
+		79231EFA1D0716A70068348A /* LatestPostsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestPostsTableViewCell.swift; sourceTree = "<group>"; };
 		79FFC1581D06363B0038E099 /* several levels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "several levels.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79FFC15B1D06363B0038E099 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79FFC1601D06363B0038E099 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				79FFC1641D06363B0038E099 /* LaunchScreen.storyboard */,
 				79FFC1671D06363B0038E099 /* Info.plist */,
 				79231EF81D0715FD0068348A /* LatestPostsTableViewController.swift */,
+				79231EFA1D0716A70068348A /* LatestPostsTableViewCell.swift */,
 			);
 			path = "several levels";
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			files = (
 				79231EF91D0715FD0068348A /* LatestPostsTableViewController.swift in Sources */,
 				79FFC15C1D06363B0038E099 /* AppDelegate.swift in Sources */,
+				79231EFB1D0716A70068348A /* LatestPostsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

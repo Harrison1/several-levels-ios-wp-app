@@ -1,5 +1,5 @@
 //
-//  LatestPostsTableViewController.swift
+//  LatestPostsTableViewCell.swift
 //  several levels
 //
 //  Created by Harrison McGuire on 6/7/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LatestPostsTableViewController: UITableViewCell {
+class LatestPostsTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,14 +19,6 @@ class LatestPostsTableViewController: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! LatestPostsTableViewCell
-        
-        // code for cell goes here
-        
-        return cell
     }
 
 }
