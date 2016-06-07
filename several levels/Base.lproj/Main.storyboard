@@ -8,14 +8,14 @@
         <!--Root View Controller-->
         <scene sceneID="MUw-2u-1kP">
             <objects>
-                <tableViewController id="lEp-JY-93R" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="mpg-Xy-74p">
+                <tableViewController id="lEp-JY-93R" customClass="LatestPostsTableViewController" customModule="several_levels" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="mpg-Xy-74p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="nci-OC-aP0">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="nci-OC-aP0" customClass="LatestPostsTableViewCell" customModule="several_levels" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="114" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nci-OC-aP0" id="1r4-31-6t8">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
