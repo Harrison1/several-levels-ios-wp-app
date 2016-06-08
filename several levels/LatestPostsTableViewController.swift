@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class LatestPostsTableViewController: UITableViewController {
 
@@ -20,6 +22,22 @@ class LatestPostsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    func getPosts(getposts : String)
+    {
+        Alamofire.request(.GET, getposts, parameters:parameters)
+            .responseJSON { response in
+                
+                guard let data = response.result.value else{
+                    print("Request failed with error")
+                    return
+                }
+                
+                self.json = JSON(data)
+                self.tableView.reloadData()
+                
+        }
     }
 
     override func didReceiveMemoryWarning() {
