@@ -24,9 +24,9 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhQ-en-VTc">
-                                            <rect key="frame" x="8" y="8" width="359" height="21"/>
+                                            <rect key="frame" x="8" y="8" width="359" height="24"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="OV2-ur-DIl"/>
+                                                <constraint firstAttribute="height" constant="24" id="OV2-ur-DIl"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <color key="textColor" red="0.43350207298526922" green="0.62295954960233391" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -34,11 +34,12 @@
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e4l-Ej-NwC">
                                             <rect key="frame" x="8" y="66" width="359" height="128"/>
+                                            <color key="backgroundColor" red="0.43350207299999999" green="0.6229595496" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDD-wp-8ne">
-                                            <rect key="frame" x="8" y="37" width="359" height="18"/>
+                                            <rect key="frame" x="8" y="42" width="359" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="18" id="MVb-3E-Nz3"/>
+                                                <constraint firstAttribute="height" constant="17" id="MVb-3E-Nz3"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -57,7 +58,7 @@
                                         <constraint firstItem="dhQ-en-VTc" firstAttribute="width" secondItem="e4l-Ej-NwC" secondAttribute="width" id="XiM-HW-I3h"/>
                                         <constraint firstItem="dhQ-en-VTc" firstAttribute="width" secondItem="EDD-wp-8ne" secondAttribute="width" id="ZNi-nc-cOy"/>
                                         <constraint firstItem="EDD-wp-8ne" firstAttribute="width" secondItem="1r4-31-6t8" secondAttribute="height" multiplier="359:199" id="b5R-sX-UGH"/>
-                                        <constraint firstItem="EDD-wp-8ne" firstAttribute="top" secondItem="1r4-31-6t8" secondAttribute="topMargin" constant="29" id="bCB-5K-UMs"/>
+                                        <constraint firstItem="EDD-wp-8ne" firstAttribute="top" secondItem="1r4-31-6t8" secondAttribute="topMargin" constant="34" id="bCB-5K-UMs"/>
                                         <constraint firstItem="e4l-Ej-NwC" firstAttribute="top" secondItem="1r4-31-6t8" secondAttribute="topMargin" constant="58" id="f4f-V4-AsD"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="dhQ-en-VTc" secondAttribute="trailing" id="g4a-fO-vzJ"/>
                                         <constraint firstAttribute="topMargin" secondItem="dhQ-en-VTc" secondAttribute="top" id="sMQ-Tt-yfq"/>

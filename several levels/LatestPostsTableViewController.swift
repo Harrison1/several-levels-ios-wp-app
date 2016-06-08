@@ -11,6 +11,10 @@ import Alamofire
 import SwiftyJSON
 
 class LatestPostsTableViewController: UITableViewController {
+    
+    let latestPosts : String = "https://wlcdesigns.com/wp-json/wp/v2/posts/"
+    let parameters: [String:AnyObject] = ["filter[category_name]" : "tutorials", "filter[posts_per_page]" : 5]
+    var json : JSON = JSON.null
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,12 +53,17 @@ class LatestPostsTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        switch self.json.type {
+            case Type.Array:
+                return self.json.count
+            default:
+                return 1
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -64,17 +73,6 @@ class LatestPostsTableViewController: UITableViewController {
         
         return cell
     }
-    
-    let latestPosts : String = "https://wlcdesigns.com/wp-json/wp/v2/posts/"
-    
-    let parameters: [String:AnyObject] = ["filter[category_name]" : "tutorials", "filter[posts_per_page]" : 5]
-    
-    var json : JSON = JSON.null
-        
-//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//            return 1
-//        }
-    
 
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
