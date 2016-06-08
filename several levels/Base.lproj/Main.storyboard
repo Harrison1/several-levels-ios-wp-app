@@ -7,7 +7,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--The Latest-->
         <scene sceneID="MUw-2u-1kP">
             <objects>
                 <tableViewController id="lEp-JY-93R" customClass="LatestPostsTableViewController" customModule="several_levels" customModuleProvider="target" sceneMemberID="viewController">
@@ -23,7 +23,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhQ-en-VTc">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhQ-en-VTc">
                                             <rect key="frame" x="8" y="8" width="359" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="OV2-ur-DIl"/>
@@ -35,7 +35,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e4l-Ej-NwC">
                                             <rect key="frame" x="8" y="66" width="359" height="128"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDD-wp-8ne">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDD-wp-8ne">
                                             <rect key="frame" x="8" y="37" width="359" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="18" id="MVb-3E-Nz3"/>
@@ -64,6 +64,11 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="EDD-wp-8ne" secondAttribute="trailing" id="w8o-dk-Ikm"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="postDate" destination="EDD-wp-8ne" id="VUQ-nQ-2dc"/>
+                                    <outlet property="postImage" destination="e4l-Ej-NwC" id="0ji-WT-nWY"/>
+                                    <outlet property="postTitle" destination="dhQ-en-VTc" id="BP1-Kn-bfN"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -71,7 +76,7 @@
                             <outlet property="delegate" destination="lEp-JY-93R" id="yx1-ZH-et6"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="zlp-Ki-p6P"/>
+                    <navigationItem key="navigationItem" title="The Latest" id="zlp-Ki-p6P"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HVy-kJ-mhR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -12,6 +12,8 @@ class LatestPostsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        getPosts(latestPosts)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -44,6 +46,17 @@ class LatestPostsTableViewController: UITableViewController {
         
         return cell
     }
+    
+    let latestPosts : String = "https://wlcdesigns.com/wp-json/wp/v2/posts/"
+    
+    let parameters: [String:AnyObject] = ["filter[category_name]" : "tutorials", "filter[posts_per_page]" : 5]
+    
+    var json : JSON = JSON.null
+        
+//        override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//            return 1
+//        }
+    
 
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
