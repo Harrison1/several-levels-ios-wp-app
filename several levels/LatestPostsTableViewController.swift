@@ -15,7 +15,7 @@ class LatestPostsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        getPosts(latestPosts)
+        getPosts(latestPosts)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -71,7 +71,7 @@ class LatestPostsTableViewController: UITableViewController {
     
     var json : JSON = JSON.null
         
-//        override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 //            return 1
 //        }
     
