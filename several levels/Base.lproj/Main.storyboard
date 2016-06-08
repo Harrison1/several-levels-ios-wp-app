@@ -35,6 +35,9 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e4l-Ej-NwC">
                                             <rect key="frame" x="8" y="66" width="359" height="128"/>
                                             <color key="backgroundColor" red="0.43350207299999999" green="0.6229595496" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="128" id="siK-nb-SCU"/>
+                                            </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDD-wp-8ne">
                                             <rect key="frame" x="8" y="42" width="359" height="17"/>
@@ -59,11 +62,25 @@
                                         <constraint firstItem="dhQ-en-VTc" firstAttribute="width" secondItem="EDD-wp-8ne" secondAttribute="width" id="ZNi-nc-cOy"/>
                                         <constraint firstItem="EDD-wp-8ne" firstAttribute="width" secondItem="1r4-31-6t8" secondAttribute="height" multiplier="359:199" id="b5R-sX-UGH"/>
                                         <constraint firstItem="EDD-wp-8ne" firstAttribute="top" secondItem="1r4-31-6t8" secondAttribute="topMargin" constant="34" id="bCB-5K-UMs"/>
+                                        <constraint firstItem="EDD-wp-8ne" firstAttribute="width" secondItem="e4l-Ej-NwC" secondAttribute="width" id="cv4-Jk-UJA"/>
                                         <constraint firstItem="e4l-Ej-NwC" firstAttribute="top" secondItem="1r4-31-6t8" secondAttribute="topMargin" constant="58" id="f4f-V4-AsD"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="dhQ-en-VTc" secondAttribute="trailing" id="g4a-fO-vzJ"/>
+                                        <constraint firstItem="dhQ-en-VTc" firstAttribute="width" secondItem="EDD-wp-8ne" secondAttribute="width" id="lPK-pj-GQY"/>
                                         <constraint firstAttribute="topMargin" secondItem="dhQ-en-VTc" secondAttribute="top" id="sMQ-Tt-yfq"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="EDD-wp-8ne" secondAttribute="trailing" id="w8o-dk-Ikm"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="JWs-Lu-aaO"/>
+                                            <exclude reference="XiM-HW-I3h"/>
+                                            <exclude reference="ZNi-nc-cOy"/>
+                                            <exclude reference="lPK-pj-GQY"/>
+                                            <exclude reference="b5R-sX-UGH"/>
+                                            <exclude reference="cv4-Jk-UJA"/>
+                                            <exclude reference="1je-Mz-aXn"/>
+                                            <exclude reference="LuG-8e-w7B"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="postDate" destination="EDD-wp-8ne" id="VUQ-nQ-2dc"/>
