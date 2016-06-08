@@ -9,6 +9,11 @@
 import UIKit
 
 class LatestPostsTableViewCell: UITableViewCell {
+    
+    @IBOutlet var postTitle: UILabel!
+    @IBOutlet var postDate: UILabel!
+    @IBOutlet var postImage: UIImageView!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
