@@ -20,6 +20,10 @@ class LatestPostsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         getPosts(latestPosts)
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(LatestPostsTableViewController.newNews), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl = refreshControl
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -28,8 +32,16 @@ class LatestPostsTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    func getPosts(getposts : String)
+    func newNews()
     {
+        getPosts(latestPosts)
+        self.tableView.reloadData()
+        refreshControl?.endRefreshing()
+    }
+    
+    
+    func getPosts(getposts : String) {
+        
         Alamofire.request(.GET, getposts, parameters:parameters)
             .responseJSON { response in
                 
@@ -70,7 +82,7 @@ class LatestPostsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! LatestPostsTableViewCell
         
         // Get row index
-        var row = indexPath.row
+        let row = indexPath.row
         
         //Make sure post title is a string
         if let title = self.json[row]["title"]["rendered"].string{
@@ -95,47 +107,47 @@ class LatestPostsTableViewController: UITableViewController {
         return cell
     }
 
-    func populateFields(cell: LatestPostsTableViewCell, index: Int){
-        
-        //Make sure post title is a string
-        guard let title = self.json[index]["title"]["rendered"].string else{
-            cell.postTitle!.text = "Title Loading..."
-            return
-        }
-        
-        // An action must always proceed the guard conditional
-        cell.postTitle!.text = title
-        
-        print("hello harrry")
-        
-        //Make sure post date is a string
-        guard let date = self.json[index]["date"].string else{
-            cell.postDate!.text = "Date --"
-            return
-        }
-        
-        cell.postDate!.text = date
-        print(date)
-        
-        /*
-         * Set up Featured Image
-         * Using guard, there's no need for nested if statements
-         * to unwrap and check optionals
-         */
-        
-        guard let image = self.json[index]["featured_image_thumbnail_url"].string where
-            image != "null"
-            else{
-                
-                print("Image didn't load")
-                return
-        }
-        
-        ImageLoader.sharedLoader.imageForUrl(image, completionHandler:{(image: UIImage?, url: String) in
-            cell.postImage.image = image!
-        })
-        
-    }
+//    func populateFields(cell: LatestPostsTableViewCell, index: Int){
+//        
+//        //Make sure post title is a string
+//        guard let title = self.json[index]["title"]["rendered"].string else{
+//            cell.postTitle!.text = "Title Loading..."
+//            return
+//        }
+//        
+//        // An action must always proceed the guard conditional
+//        cell.postTitle!.text = title
+//        
+//        print("hello harrry")
+//        
+//        //Make sure post date is a string
+//        guard let date = self.json[index]["date"].string else{
+//            cell.postDate!.text = "Date --"
+//            return
+//        }
+//        
+//        cell.postDate!.text = date
+//        print(date)
+//        
+//        /*
+//         * Set up Featured Image
+//         * Using guard, there's no need for nested if statements
+//         * to unwrap and check optionals
+//         */
+//        
+//        guard let image = self.json[index]["featured_image_thumbnail_url"].string where
+//            image != "null"
+//            else{
+//                
+//                print("Image didn't load")
+//                return
+//        }
+//        
+//        ImageLoader.sharedLoader.imageForUrl(image, completionHandler:{(image: UIImage?, url: String) in
+//            cell.postImage.image = image!
+//        })
+//        
+//    }
     
     
     
@@ -209,7 +221,7 @@ class ImageLoader {
     
     func imageForUrl(urlString: String, completionHandler:(image: UIImage?, url: String) -> ()) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {()in
-            var data: NSData? = self.cache.objectForKey(urlString) as? NSData
+            let data: NSData? = self.cache.objectForKey(urlString) as? NSData
             
             if let goodData = data {
                 let image = UIImage(data: goodData)
@@ -220,7 +232,7 @@ class ImageLoader {
             }
             
             
-            var downloadTask: NSURLSessionDataTask = NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: urlString)!, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void in
+            let downloadTask: NSURLSessionDataTask = NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: urlString)!, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void in
                 if (error != nil) {
                     completionHandler(image: nil, url: urlString)
                     return

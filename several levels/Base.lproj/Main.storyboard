@@ -34,7 +34,6 @@
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e4l-Ej-NwC">
                                             <rect key="frame" x="8" y="66" width="359" height="128"/>
-                                            <color key="backgroundColor" red="0.43350207299999999" green="0.6229595496" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="128" id="siK-nb-SCU"/>
                                             </constraints>
