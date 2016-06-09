@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SDWebImage
 
 class SinglePostViewController: UIViewController, UIWebViewDelegate {
     
@@ -74,7 +75,8 @@ class SinglePostViewController: UIViewController, UIWebViewDelegate {
             self.scrollView.addSubview(postTitle)
         }
         
-        if let featured = json["featured_image_url"].string {
+        
+        if let featured : NSURL? = NSURL(string: json["featured_image_url"].string!) {
             
             /*
              * featuredImage position:
@@ -93,9 +95,13 @@ class SinglePostViewController: UIViewController, UIWebViewDelegate {
             featuredImage.clipsToBounds = true
             
             //Load image outside main thread
-            ImageLoader.sharedLoader.imageForUrl(featured, completionHandler:{(image: UIImage?, url: String) in
-                self.featuredImage.image = image!
-            })
+//            ImageLoader.sharedLoader.imageForUrl(featured, completionHandler:{(image: UIImage?, url: String) in
+//                self.featuredImage.image = image!
+//            })
+            featuredImage.sd_setImageWithURL(featured)
+            
+            
+            
             
             self.scrollView.addSubview(featuredImage)
         }

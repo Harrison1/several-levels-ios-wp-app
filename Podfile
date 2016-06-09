@@ -6,6 +6,7 @@ target 'several levels' do
   use_frameworks!
   pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
   pod 'Alamofire', '~> 3.4'
+  pod 'SDWebImage', '~>3.8'
   # Pods for several levels
 
   target 'several levelsTests' do
