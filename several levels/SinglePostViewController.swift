@@ -18,6 +18,7 @@ class SinglePostViewController: UIViewController, UIWebViewDelegate {
     lazy var featuredImage : UIImageView = UIImageView()
     lazy var postTime : UILabel = UILabel()
     lazy var postContent : UILabel = UILabel()
+    lazy var postAuthor : UILabel = UILabel()
     lazy var postContentWeb : UIWebView = UIWebView()
     lazy var generalPadding : CGFloat = 20
     
@@ -126,6 +127,41 @@ class SinglePostViewController: UIViewController, UIWebViewDelegate {
             self.scrollView.addSubview(postContentWeb)
             
         }
+        
+        if let author = json["author_name"].string {
+            
+            /*
+             * postTitle UI Label position:
+             * x = 10px, y = 20px, width = screen width - 20px, height = 1px?!
+             */
+            
+            postAuthor.frame = CGRectMake(10, (generalPadding * 2 + postTitle.frame.height + featuredImage.frame.height + postTime.frame.height + postContentWeb.frame.height), self.view.frame.size.width - 20, 1)
+            
+            //Title color is black...
+            postAuthor.textColor = UIColor.blackColor()
+            
+            //Title alignment is center...
+            postAuthor.textAlignment = NSTextAlignment.Left
+            
+            //Break long titles by word wrap
+            postAuthor.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            
+            //Font size 24px...
+            postAuthor.font = UIFont.systemFontOfSize(18.0)
+            
+            //Number of line 0. Must be set to 0 to accomodate varying title lengths
+            postAuthor.numberOfLines = 0
+            
+            //Title text is the json title...
+            postAuthor.text = "by " + author
+            
+            //This is resizes the height of the title label to accomodate title text. That's why the CGRect height was set to 1px.
+            postAuthor.sizeToFit()
+            
+            //Add the postTitle UILabel to the scrollView
+            self.scrollView.addSubview(postAuthor)
+        }
+        
     }
     
     // MARK: This method fires after all subviews have loaded
@@ -152,6 +188,8 @@ class SinglePostViewController: UIViewController, UIWebViewDelegate {
         
         postContentWeb.frame = CGRectMake(10, (generalPadding * 2 + postTitle.frame.height + featuredImage.frame.height + postTime.frame.height), self.view.frame.size.width - 20, postContentWeb.scrollView.contentSize.height)
         
+        postAuthor.frame = CGRectMake(10, (generalPadding * 2 + postTitle.frame.height + featuredImage.frame.height + postTime.frame.height + postContentWeb.frame.height), self.view.frame.size.width - 20, postAuthor.frame.height)
+        
         var finalHeight : CGFloat = 0
         self.scrollView.subviews.forEach { (subview) -> () in
             finalHeight += subview.frame.height
@@ -159,6 +197,15 @@ class SinglePostViewController: UIViewController, UIWebViewDelegate {
         
         self.scrollView.contentSize.height = finalHeight
     }
+    
+//    func delay(delay:Double, closure:()->()) {
+//        dispatch_after(
+//            dispatch_time(
+//                DISPATCH_TIME_NOW,
+//                Int64(delay * Double(NSEC_PER_SEC))
+//            ),
+//            dispatch_get_main_queue(), closure)
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
