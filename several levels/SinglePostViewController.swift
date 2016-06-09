@@ -16,9 +16,13 @@ class SinglePostViewController: UIViewController, UIWebViewDelegate {
     lazy var scrollView : UIScrollView = UIScrollView()
     lazy var postTitle : UILabel = UILabel()
     lazy var featuredImage : UIImageView = UIImageView()
+    lazy var authorImage : UIImageView = UIImageView()
     lazy var postTime : UILabel = UILabel()
     lazy var postContent : UILabel = UILabel()
     lazy var postAuthor : UILabel = UILabel()
+    lazy var postAuthorDescription : UILabel = UILabel()
+    lazy var postAuthorTwitter : UILabel = UILabel()
+    lazy var postAuthorYoutube : UILabel = UILabel()
     lazy var postContentWeb : UIWebView = UIWebView()
     lazy var generalPadding : CGFloat = 20
     
@@ -147,7 +151,7 @@ class SinglePostViewController: UIViewController, UIWebViewDelegate {
             postAuthor.lineBreakMode = NSLineBreakMode.ByWordWrapping
             
             //Font size 24px...
-            postAuthor.font = UIFont.systemFontOfSize(18.0)
+            postAuthor.font = UIFont.systemFontOfSize(15.0)
             
             //Number of line 0. Must be set to 0 to accomodate varying title lengths
             postAuthor.numberOfLines = 0
