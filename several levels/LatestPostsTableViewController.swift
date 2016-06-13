@@ -107,13 +107,13 @@ class LatestPostsTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let singlePostVC : SinglePostViewController = storyboard!.instantiateViewControllerWithIdentifier("SinglePostViewController") as! SinglePostViewController
-        singlePostVC.json = self.json[indexPath.row]
-        self.navigationController?.pushViewController(singlePostVC, animated: true)
-        
-    }
+//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        
+//        let singlePostVC : SinglePostViewController = storyboard!.instantiateViewControllerWithIdentifier("SinglePostViewController") as! SinglePostViewController
+//        singlePostVC.json = self.json[indexPath.row]
+//        self.navigationController?.pushViewController(singlePostVC, animated: true)
+//        
+//    }
 
 //    func populateFields(cell: LatestPostsTableViewCell, index: Int){
 //        

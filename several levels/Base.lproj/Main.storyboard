@@ -119,6 +119,7 @@
                                     <outlet property="postDate" destination="EDD-wp-8ne" id="VUQ-nQ-2dc"/>
                                     <outlet property="postImage" destination="e4l-Ej-NwC" id="0ji-WT-nWY"/>
                                     <outlet property="postTitle" destination="dhQ-en-VTc" id="BP1-Kn-bfN"/>
+                                    <segue destination="8pY-7d-RjM" kind="show" id="59b-eK-fHP"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -133,24 +134,24 @@
             </objects>
             <point key="canvasLocation" x="805.5" y="902.5"/>
         </scene>
-        <!--Single Post View Controller-->
-        <scene sceneID="N3e-5m-Odh">
+        <!--View Controller-->
+        <scene sceneID="fOg-aw-Tp6">
             <objects>
-                <viewController storyboardIdentifier="SinglePostViewController" id="zBa-fh-5Bs" customClass="SinglePostViewController" customModule="several_levels" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8pY-7d-RjM" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="vtS-h5-sMH"/>
-                        <viewControllerLayoutGuide type="bottom" id="kHb-z0-5Pz"/>
+                        <viewControllerLayoutGuide type="top" id="zOF-Dg-ccX"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fvd-L3-XTX"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="HnT-jC-V51">
+                    <view key="view" contentMode="scaleToFill" id="T2N-Ec-3q4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a7n-7u-DVj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dg7-XS-ppV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1249.5" y="902.5"/>
+            <point key="canvasLocation" x="1284.5" y="902.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VaV-yJ-JHK">
