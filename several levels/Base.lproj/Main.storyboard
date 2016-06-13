@@ -134,10 +134,10 @@
             </objects>
             <point key="canvasLocation" x="805.5" y="902.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Web View Controller-->
         <scene sceneID="fOg-aw-Tp6">
             <objects>
-                <viewController id="8pY-7d-RjM" sceneMemberID="viewController">
+                <viewController id="8pY-7d-RjM" customClass="WebViewController" customModule="several_levels" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zOF-Dg-ccX"/>
                         <viewControllerLayoutGuide type="bottom" id="Fvd-L3-XTX"/>
@@ -145,9 +145,24 @@
                     <view key="view" contentMode="scaleToFill" id="T2N-Ec-3q4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="63F-n1-vxT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="63F-n1-vxT" firstAttribute="height" secondItem="T2N-Ec-3q4" secondAttribute="height" id="3Bs-ZF-sae"/>
+                            <constraint firstItem="63F-n1-vxT" firstAttribute="width" secondItem="T2N-Ec-3q4" secondAttribute="width" id="FLe-TM-8yg"/>
+                            <constraint firstItem="63F-n1-vxT" firstAttribute="centerX" secondItem="T2N-Ec-3q4" secondAttribute="centerX" id="LDV-wd-5dj"/>
+                            <constraint firstItem="63F-n1-vxT" firstAttribute="centerY" secondItem="T2N-Ec-3q4" secondAttribute="centerY" id="i67-zN-wjb"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="webView" destination="63F-n1-vxT" id="oP1-MU-xkD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dg7-XS-ppV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
