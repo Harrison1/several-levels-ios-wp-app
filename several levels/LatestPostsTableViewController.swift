@@ -14,7 +14,7 @@ import SDWebImage
 class LatestPostsTableViewController: UITableViewController {
     
     let latestPosts : String = "http://severallevels.io/wp-json/wp/v2/posts/"
-//    let parameters: [String:AnyObject] = ["filter[category_name]" : "tutorials", "filter[posts_per_page]" : 5]
+    let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
     var json : JSON = JSON.null
 
     override func viewDidLoad() {
@@ -43,8 +43,7 @@ class LatestPostsTableViewController: UITableViewController {
     
     func getPosts(getposts : String) {
         
-//        Alamofire.request(.GET, getposts, parameters:parameters)
-          Alamofire.request(.GET, getposts).responseJSON { response in
+          Alamofire.request(.GET, getposts, parameters: parameters).responseJSON { response in
                 
                 guard let data = response.result.value else{
                     print("Request failed with error")
