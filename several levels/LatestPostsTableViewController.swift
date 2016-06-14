@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SDWebImage
 
 class LatestPostsTableViewController: UITableViewController {
     
@@ -85,24 +86,29 @@ class LatestPostsTableViewController: UITableViewController {
         let row = indexPath.row
         
         //Make sure post title is a string
-        if let title = self.json[row]["title"]["rendered"].string{
+        if let title = self.json[row]["title"]["rendered"].string {
             cell.postTitle!.text = title
         }
         
         //Make sure post date is a string
-        if let date = self.json[row]["date"].string{
+        if let date = self.json[row]["date"].string {
             cell.postDate!.text = date
         }
         
-        if let image = self.json[row]["featured_image_url"].string{
-            
-            if image != "null"{
-                
-                ImageLoader.sharedLoader.imageForUrl(image, completionHandler:{(image: UIImage?, url: String) in
-                    cell.postImage.image = image!
-                })
-            }
+        if let featureImage = self.json[row]["featured_image_url"].string {
+            let image : NSURL? = NSURL(string: featureImage)
+            cell.postImage.sd_setImageWithURL(image)
         }
+
+//        if let image = self.json[row]["featured_image_url"].string{
+//            
+//            if image != "null"{
+//                            
+//                ImageLoader.sharedLoader.imageForUrl(image, completionHandler:{(image: UIImage?, url: String) in
+//                    cell.postImage.image = image!
+//                })
+//            }
+//        }
         
         return cell
     }

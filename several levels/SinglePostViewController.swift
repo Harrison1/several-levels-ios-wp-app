@@ -100,9 +100,6 @@ class SinglePostViewController: UIViewController, UIWebViewDelegate {
 //            })
             featuredImage.sd_setImageWithURL(featured)
             
-            
-            
-            
             self.scrollView.addSubview(featuredImage)
         }
         
