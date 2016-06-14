@@ -17,6 +17,8 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NSUserDefaults.standardUserDefaults().registerDefaults(["UserAgent": "several-levels"])
+        
         // make sure post url is as string
         if let postLink = self.viewPost["link"].string {
             
