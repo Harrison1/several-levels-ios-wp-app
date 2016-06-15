@@ -83,7 +83,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         
         //Make sure post date is a string
         if let date = self.json[row]["date"].string {
-            cell.postDateH!.text = date
+            cell.postD.text = date
         }
         
         if let featureImage = self.json[row]["featured_image_url"].string {

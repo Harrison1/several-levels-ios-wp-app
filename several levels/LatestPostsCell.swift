@@ -18,6 +18,8 @@ class LatestPostsCell: UITableViewCell {
     lazy var postD: UILabel = UILabel();
     lazy var postI: UIImageView = UIImageView();
     
+    lazy var padding : CGFloat = 20;
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,9 +46,7 @@ class LatestPostsCell: UITableViewCell {
         super.layoutSubviews()
         
         //myLabel.frame = CGRect(x: 20, y: 0, width: 70, height: 30)
-        postT.backgroundColor = UIColor.yellowColor()
-        
-        postT.frame = CGRectMake(10, 20, 400 - 20, 1)
+        postT.frame = CGRectMake(10, padding, self.contentView.frame.size.width - 20, 1)
         
         //Title color is black...
         postT.textColor = UIColor.blackColor()
@@ -58,7 +58,7 @@ class LatestPostsCell: UITableViewCell {
         postT.lineBreakMode = NSLineBreakMode.ByWordWrapping
         
         //Font size 24px...
-        postT.font = UIFont.systemFontOfSize(24.0)
+        postT.font = UIFont.systemFontOfSize(20.0)
         
         //Number of line 0. Must be set to 0 to accomodate varying title lengths
         postT.numberOfLines = 1
@@ -67,6 +67,13 @@ class LatestPostsCell: UITableViewCell {
         postT.sizeToFit()
         
         self.contentView.addSubview(postT)
+        
+        postD.frame = CGRectMake(10, (padding + 10 + postT.frame.height), self.contentView.frame.size.width - 20, 10)
+        postD.textColor = UIColor.grayColor()
+        postD.font = UIFont(name: postD.font.fontName, size: 12)
+        postD.textAlignment = NSTextAlignment.Left
+        
+        self.contentView.addSubview(postD)
     }
 
 }

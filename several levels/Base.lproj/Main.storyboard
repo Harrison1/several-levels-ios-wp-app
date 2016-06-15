@@ -213,27 +213,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="335" height="219"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oe5-bW-gXm">
-                                                    <rect key="frame" x="8" y="0.0" width="34" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z9G-pb-dK5">
-                                                    <rect key="frame" x="8" y="29" width="36" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mNk-5e-bYh">
                                                     <rect key="frame" x="8" y="58" width="319" height="153"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="postDateH" destination="Z9G-pb-dK5" id="TJa-Q6-KMx"/>
                                             <outlet property="postImageH" destination="mNk-5e-bYh" id="cLG-lP-VqH"/>
-                                            <outlet property="postTitleH" destination="Oe5-bW-gXm" id="8iT-q9-nO9"/>
                                             <segue destination="8pY-7d-RjM" kind="show" id="wlu-Qp-MTe"/>
                                         </connections>
                                     </tableViewCell>
@@ -254,6 +240,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="59b-eK-fHP"/>
+        <segue reference="wlu-Qp-MTe"/>
     </inferredMetricsTieBreakers>
 </document>
