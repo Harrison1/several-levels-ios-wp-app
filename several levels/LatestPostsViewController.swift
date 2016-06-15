@@ -78,7 +78,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         
         //Make sure post title is a string
         if let title = self.json[row]["title"]["rendered"].string {
-            cell.postTitleH!.text = title
+            cell.postT.text = title
         }
         
         //Make sure post date is a string

@@ -33,6 +33,17 @@ class LatestPostsCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        //myLabel.frame = CGRect(x: 20, y: 0, width: 70, height: 30)
         postT.backgroundColor = UIColor.yellowColor()
         
         postT.frame = CGRectMake(10, 20, 400 - 20, 1)
@@ -56,16 +67,6 @@ class LatestPostsCell: UITableViewCell {
         postT.sizeToFit()
         
         self.contentView.addSubview(postT)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        //myLabel.frame = CGRect(x: 20, y: 0, width: 70, height: 30)
     }
 
 }
