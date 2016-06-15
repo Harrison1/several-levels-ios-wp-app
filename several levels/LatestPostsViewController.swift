@@ -94,6 +94,18 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         return cell
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // which view controller to send to
+        let postScene = segue.destinationViewController as! WebViewController;
+        
+        // pass the selected JSON to the 'viewPost varible of the WebViewController Class
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+            let selected = self.json[indexPath.row]
+            postScene.viewPost = selected
+        }
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
