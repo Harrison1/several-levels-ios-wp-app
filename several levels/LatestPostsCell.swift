@@ -75,7 +75,7 @@ class LatestPostsCell: UITableViewCell {
         postD.textAlignment = NSTextAlignment.Left
         self.contentView.addSubview(postD)
         
-        
+          
         // programatically add image
         postI.frame = CGRect(x: 10, y: (padding + postT.frame.height + postD.frame.height), width: self.contentView.frame.size.width - 20, height: 140)
         postI.contentMode = .ScaleAspectFill
