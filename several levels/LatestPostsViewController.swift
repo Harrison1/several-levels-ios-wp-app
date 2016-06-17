@@ -88,7 +88,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         
         if let featureImage = self.json[row]["featured_image_url"].string {
             let image : NSURL? = NSURL(string: featureImage)
-            cell.postImageH.sd_setImageWithURL(image)
+            cell.postI.sd_setImageWithURL(image)
         }
         
         return cell

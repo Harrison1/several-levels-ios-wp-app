@@ -68,12 +68,21 @@ class LatestPostsCell: UITableViewCell {
         
         self.contentView.addSubview(postT)
         
+        // programatically add date to cell
         postD.frame = CGRectMake(10, (padding + 10 + postT.frame.height), self.contentView.frame.size.width - 20, 10)
         postD.textColor = UIColor.grayColor()
         postD.font = UIFont(name: postD.font.fontName, size: 12)
         postD.textAlignment = NSTextAlignment.Left
-        
         self.contentView.addSubview(postD)
+        
+        
+        // programatically add image
+        postI.frame = CGRect(x: 10, y: (padding + postT.frame.height + postD.frame.height), width: self.contentView.frame.size.width - 20, height: 140)
+        postI.contentMode = .ScaleAspectFill
+        postI.clipsToBounds = true
+        self.contentView.addSubview(postI)
+        
+        
     }
 
 }
