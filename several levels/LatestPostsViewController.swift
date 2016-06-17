@@ -17,6 +17,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
     let latestPosts : String = "http://severallevels.io/wp-json/wp/v2/posts/"
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
     var json : JSON = JSON.null
+    lazy var refreshControl: UIRefreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,10 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(LatestPostsViewController.newNews), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.addSubview(refreshControl)
         
         //let refreshControl = UIRefreshControl()
         //refreshControl.addTarget(self, action: #selector(LatestPostsTableViewController.newNews), forControlEvents: UIControlEvents.ValueChanged)
@@ -38,7 +43,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
     {
         getPosts(latestPosts)
         self.tableView.reloadData()
-        //refreshControl?.endRefreshing()
+        refreshControl.endRefreshing()
     }
     
     

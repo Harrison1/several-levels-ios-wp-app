@@ -46,10 +46,10 @@ class LatestPostsCell: UITableViewCell {
         super.layoutSubviews()
         
         //myLabel.frame = CGRect(x: 20, y: 0, width: 70, height: 30)
-        postT.frame = CGRectMake(10, padding, self.contentView.frame.size.width - 20, 1)
+        postT.frame = CGRectMake(10, 10, self.contentView.frame.size.width - 20, 1)
         
         //Title color is black...
-        postT.textColor = UIColor.blackColor()
+        postT.textColor = UIColor.whiteColor()
         
         //Title alignment is center...
         postT.textAlignment = NSTextAlignment.Left
@@ -58,10 +58,10 @@ class LatestPostsCell: UITableViewCell {
         postT.lineBreakMode = NSLineBreakMode.ByWordWrapping
         
         //Font size 24px...
-        postT.font = UIFont.systemFontOfSize(20.0)
+        postT.font = UIFont.systemFontOfSize(18.0)
         
         //Number of line 0. Must be set to 0 to accomodate varying title lengths
-        postT.numberOfLines = 1
+        postT.numberOfLines = 2
         
         //This is resizes the height of the title label to accomodate title text. That's why the CGRect height was set to 1px.
         postT.sizeToFit()
@@ -69,7 +69,7 @@ class LatestPostsCell: UITableViewCell {
         self.contentView.addSubview(postT)
         
         // programatically add date to cell
-        postD.frame = CGRectMake(10, (padding + 10 + postT.frame.height), self.contentView.frame.size.width - 20, 10)
+        postD.frame = CGRectMake(10, (padding + postT.frame.height), self.contentView.frame.size.width - 20, 10)
         postD.textColor = UIColor.grayColor()
         postD.font = UIFont(name: postD.font.fontName, size: 12)
         postD.textAlignment = NSTextAlignment.Left
@@ -77,7 +77,7 @@ class LatestPostsCell: UITableViewCell {
         
           
         // programatically add image
-        postI.frame = CGRect(x: 10, y: (padding + postT.frame.height + postD.frame.height), width: self.contentView.frame.size.width - 20, height: 140)
+        postI.frame = CGRect(x: 0, y: (padding + 10 + postT.frame.height + postD.frame.height), width: self.contentView.frame.size.width, height: 160)
         postI.contentMode = .ScaleAspectFill
         postI.clipsToBounds = true
         self.contentView.addSubview(postI)

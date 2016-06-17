@@ -133,7 +133,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HVy-kJ-mhR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="978.5" y="1269.5"/>
+            <point key="canvasLocation" x="965.5" y="1339.5"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="fOg-aw-Tp6">
@@ -193,7 +193,7 @@
         <!--The Latest-->
         <scene sceneID="sce-0s-nzg">
             <objects>
-                <viewController title="The Latest" id="VUX-pX-wwD" customClass="LatestPostsViewController" customModule="several_levels" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="The Latest" automaticallyAdjustsScrollViewInsets="NO" id="VUX-pX-wwD" customClass="LatestPostsViewController" customModule="several_levels" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zh6-ph-Ti0"/>
                         <viewControllerLayoutGuide type="bottom" id="rnF-jn-s34"/>
@@ -202,31 +202,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="220" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aQ6-5k-yml">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="220" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aQ6-5k-yml">
                                 <rect key="frame" x="20" y="72" width="335" height="587"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="220" id="YYy-EO-ngp" customClass="LatestPostsCell" customModule="several_levels" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="335" height="220"/>
+                                        <rect key="frame" x="0.0" y="28" width="335" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YYy-EO-ngp" id="OzE-DI-tdP">
-                                            <rect key="frame" x="0.0" y="0.0" width="335" height="219"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="220"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mNk-5e-bYh">
-                                                    <rect key="frame" x="8" y="58" width="319" height="153"/>
-                                                </imageView>
-                                            </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.17948717948717929" green="0.17948717948717929" blue="0.17948717948717929" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="separatorInset" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <outlet property="postImageH" destination="mNk-5e-bYh" id="cLG-lP-VqH"/>
                                             <segue destination="8pY-7d-RjM" kind="show" id="wlu-Qp-MTe"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="The Latest" id="ocg-eB-05a"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
