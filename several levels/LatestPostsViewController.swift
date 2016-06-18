@@ -77,6 +77,8 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
                 return
             }
             
+            self.tableView.setContentOffset(CGPointZero, animated: false)
+            
             self.json = JSON(data)
             self.tableView.reloadData()
             
