@@ -14,6 +14,12 @@ import SDWebImage
 class LatestPostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var navTutorials: UITabBarItem!
+    @IBOutlet var navGames: UITabBarItem!
+    @IBOutlet var navTech: UITabBarItem!
+    
+    
+    
     let latestPosts : String = "http://severallevels.io/wp-json/wp/v2/posts/"
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
     var json : JSON = JSON.null
@@ -27,16 +33,10 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         tableView.delegate = self
         tableView.dataSource = self
         
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.tintColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
         refreshControl.addTarget(self, action: #selector(LatestPostsViewController.newNews), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
         
-        //let refreshControl = UIRefreshControl()
-        //refreshControl.addTarget(self, action: #selector(LatestPostsTableViewController.newNews), forControlEvents: UIControlEvents.ValueChanged)
-        //self.refreshControl = refreshControl
-
-
-        // Do any additional setup after loading the view.
     }
     
     func newNews()
@@ -87,8 +87,22 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         }
         
         //Make sure post date is a string
-        if let date = self.json[row]["date"].string {
-            cell.postD.text = date
+        if self.json[row]["date"].string != nil {
+            
+            let dateString = self.json[row]["date"].string
+            let dateFormatter = NSDateFormatter()
+            
+            dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+            
+            let dateObj = dateFormatter.dateFromString(dateString!)
+            
+            dateFormatter.dateFormat = "MM-dd-yyyy"
+            
+            let dateStringConverted = "\(dateFormatter.stringFromDate(dateObj!))"
+            
+            cell.postD.text = dateStringConverted
+            
         }
         
         if let featureImage = self.json[row]["featured_image_url"].string {
@@ -97,6 +111,32 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         }
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 260.0
+    }
+    
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+//        selectedCell.selectionStyle = .None
+//    }
+    
+//    func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+//        let selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+//        selectedCell.selectionStyle = .None
+//    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        cell.contentView.backgroundColor = UIColor.blackColor()
+        
+        let blackSpaceView : UIView = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, 240))
+        
+        blackSpaceView.layer.backgroundColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [44/255, 44/255, 44/255, 1.0])
+        
+        cell.contentView.addSubview(blackSpaceView)
+        cell.contentView.sendSubviewToBack(blackSpaceView)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -14,9 +14,10 @@ class LatestPostsCell: UITableViewCell {
     @IBOutlet var postDateH: UILabel!
     @IBOutlet var postImageH: UIImageView!
     
-    lazy var postT: UILabel = UILabel();
-    lazy var postD: UILabel = UILabel();
-    lazy var postI: UIImageView = UIImageView();
+    lazy var postT: UILabel = UILabel()
+    lazy var postD: UILabel = UILabel()
+    lazy var postI: UIImageView = UIImageView()
+    lazy var postR: UILabel = UILabel()
     
     lazy var padding : CGFloat = 20;
     
@@ -45,8 +46,14 @@ class LatestPostsCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        // programatically add image
+        postI.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.size.width, height: 160)
+        postI.contentMode = .ScaleAspectFill
+        postI.clipsToBounds = true
+        self.contentView.addSubview(postI)
+        
         //myLabel.frame = CGRect(x: 20, y: 0, width: 70, height: 30)
-        postT.frame = CGRectMake(10, 10, self.contentView.frame.size.width - 20, 1)
+        postT.frame = CGRectMake(10, 10 + postI.frame.size.height, self.contentView.frame.size.width - 20, 1)
         
         //Title color is black...
         postT.textColor = UIColor.whiteColor()
@@ -69,18 +76,16 @@ class LatestPostsCell: UITableViewCell {
         self.contentView.addSubview(postT)
         
         // programatically add date to cell
-        postD.frame = CGRectMake(10, (padding + postT.frame.height), self.contentView.frame.size.width - 20, 10)
+        postD.frame = CGRectMake(10, 15 + postI.frame.size.height + postT.frame.height, self.contentView.frame.size.width - 20, 10)
         postD.textColor = UIColor.grayColor()
         postD.font = UIFont(name: postD.font.fontName, size: 12)
         postD.textAlignment = NSTextAlignment.Left
         self.contentView.addSubview(postD)
         
-          
-        // programatically add image
-        postI.frame = CGRect(x: 0, y: (padding + 10 + postT.frame.height + postD.frame.height), width: self.contentView.frame.size.width, height: 160)
-        postI.contentMode = .ScaleAspectFill
-        postI.clipsToBounds = true
-        self.contentView.addSubview(postI)
+        postR.frame = CGRectMake(0, padding + 47 + postI.frame.size.height + postD.frame.size.height, self.contentView.frame.size.width/1.2, 3)
+        postR.backgroundColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
+        postR.textAlignment = NSTextAlignment.Left
+        self.contentView.addSubview(postR)
         
         
     }
