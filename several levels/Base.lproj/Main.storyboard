@@ -103,11 +103,39 @@
                                 <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V8r-Bt-ZW3">
+                                <rect key="frame" x="-4" y="623" width="383" height="44"/>
+                                <color key="backgroundColor" red="0.29832124082674505" green="0.36081624687137498" blue="0.74617387820512815" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="2xJ-B4-mfH"/>
+                                    <barButtonItem style="plain" id="nbh-J2-8ih">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" id="EEr-ag-bwL" userLabel="Segmented Navigation">
+                                            <rect key="frame" x="26" y="7" width="331" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="" image="Home"/>
+                                                <segment title="tutorials"/>
+                                                <segment title="games"/>
+                                                <segment title="tech"/>
+                                            </segments>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="segmentedNavigation:" destination="VUX-pX-wwD" eventType="valueChanged" id="FNS-Cq-gEn"/>
+                                            </connections>
+                                        </segmentedControl>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="fFm-ND-29V"/>
+                                </items>
+                                <color key="barTintColor" red="0.0" green="0.62773252605188312" blue="0.77181490384615381" alpha="1" colorSpace="calibratedRGB"/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="aQ6-5k-yml" firstAttribute="width" secondItem="9wQ-7g-wR1" secondAttribute="height" multiplier="335:667" id="5vH-X2-vwe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="V8r-Bt-ZW3" secondAttribute="trailing" constant="-20" id="68U-YH-Mgz"/>
                             <constraint firstItem="BMC-Mh-FE6" firstAttribute="top" secondItem="zh6-ph-Ti0" secondAttribute="bottom" id="9sL-rr-pJP"/>
+                            <constraint firstItem="V8r-Bt-ZW3" firstAttribute="centerX" secondItem="9wQ-7g-wR1" secondAttribute="centerX" id="G6V-gS-yCI"/>
                             <constraint firstItem="aQ6-5k-yml" firstAttribute="top" secondItem="zh6-ph-Ti0" secondAttribute="bottom" constant="22" id="Jid-nB-Jcg"/>
                             <constraint firstItem="aQ6-5k-yml" firstAttribute="top" secondItem="zh6-ph-Ti0" secondAttribute="bottom" constant="26" id="RfI-Cl-sAx"/>
                             <constraint firstItem="aQ6-5k-yml" firstAttribute="top" secondItem="zh6-ph-Ti0" secondAttribute="bottom" constant="30" id="UAW-5y-Pxi"/>
@@ -117,6 +145,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="BMC-Mh-FE6" secondAttribute="trailing" constant="-20" id="d1Z-Pm-wKO"/>
                             <constraint firstItem="BMC-Mh-FE6" firstAttribute="leading" secondItem="9wQ-7g-wR1" secondAttribute="leadingMargin" constant="-20" id="f0d-Lo-Im2"/>
                             <constraint firstItem="rnF-jn-s34" firstAttribute="top" secondItem="aQ6-5k-yml" secondAttribute="bottom" constant="34" id="fJZ-q0-Z5b"/>
+                            <constraint firstItem="rnF-jn-s34" firstAttribute="top" secondItem="V8r-Bt-ZW3" secondAttribute="bottom" id="fva-3B-kpV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aQ6-5k-yml" secondAttribute="trailing" id="igo-pX-Tyh"/>
                             <constraint firstItem="rnF-jn-s34" firstAttribute="top" secondItem="aQ6-5k-yml" secondAttribute="bottom" constant="57" id="iqs-TX-ayo"/>
                             <constraint firstItem="rnF-jn-s34" firstAttribute="top" secondItem="aQ6-5k-yml" secondAttribute="bottom" constant="43" id="ohg-QD-iPX"/>
@@ -125,6 +154,7 @@
                             <constraint firstItem="aQ6-5k-yml" firstAttribute="top" secondItem="zh6-ph-Ti0" secondAttribute="bottom" constant="30" id="u1x-Fr-yax"/>
                             <constraint firstItem="rnF-jn-s34" firstAttribute="top" secondItem="aQ6-5k-yml" secondAttribute="bottom" constant="8" id="uf7-ND-dGH"/>
                             <constraint firstItem="BMC-Mh-FE6" firstAttribute="top" secondItem="zh6-ph-Ti0" secondAttribute="bottom" id="z2r-fa-EUT"/>
+                            <constraint firstItem="V8r-Bt-ZW3" firstAttribute="leading" secondItem="9wQ-7g-wR1" secondAttribute="leadingMargin" constant="-20" id="z3d-EU-Dd7"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -146,6 +176,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="sectionTitle" destination="BMC-Mh-FE6" id="RXW-Xv-nCm"/>
+                        <outlet property="segmentedControl" destination="EEr-ag-bwL" id="puU-fe-Zhg"/>
                         <outlet property="tableView" destination="aQ6-5k-yml" id="Abt-n1-CtV"/>
                     </connections>
                 </viewController>
@@ -154,4 +185,7 @@
             <point key="canvasLocation" x="431.5" y="902.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Home" width="24" height="24"/>
+    </resources>
 </document>

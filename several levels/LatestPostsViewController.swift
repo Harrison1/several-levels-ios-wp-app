@@ -13,11 +13,12 @@ import SDWebImage
 
 class LatestPostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var hidingNavBarManager: HidingNavigationBarManager?
     @IBOutlet var tableView: UITableView!
     @IBOutlet var sectionTitle: UILabel!
     
 //    let extensionView = sectionTitle
+    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     let latestPosts : String = "http://severallevels.io/wp-json/wp/v2/posts/"
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
@@ -56,14 +57,32 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         getPosts(latestPosts)
         self.tableView.reloadData()
         refreshControl.endRefreshing()
+        sectionTitle.text = "the latest"
     }
     
-//    @IBAction func navTutorials(sender: UIButton) {
-//        getPostsNu(latestPosts)
-//        self.tableView.reloadData()
-//        refreshControl.endRefreshing()
-//    }
     
+    func navTutorials() {
+        getPostsNu(latestPosts)
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+        sectionTitle.text = "tutorials"
+    }
+    
+    @IBAction func segmentedNavigation(sender: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            newNews()
+        case 1:
+            navTutorials()
+        case 2:
+            print("hello games")
+        case 3:
+            print("hello tech")
+        default:
+            break
+        }
+    }
 //    if let tabBar = navigationController?.too {
 //        hidingNavBarManager?.manageBottomBar(too)
 //    }
