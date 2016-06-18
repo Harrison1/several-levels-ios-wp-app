@@ -114,9 +114,9 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="" image="Home"/>
-                                                <segment title="tutorials"/>
-                                                <segment title="games"/>
-                                                <segment title="tech"/>
+                                                <segment title="" image="tutorials"/>
+                                                <segment title="" image="games"/>
+                                                <segment title="" image="tech"/>
                                             </segments>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
@@ -187,5 +187,8 @@
     </scenes>
     <resources>
         <image name="Home" width="24" height="24"/>
+        <image name="games" width="24" height="24"/>
+        <image name="tech" width="24" height="24"/>
+        <image name="tutorials" width="24" height="24"/>
     </resources>
 </document>
