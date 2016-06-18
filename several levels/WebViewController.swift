@@ -14,6 +14,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var webView: UIWebView!
     var viewPost : JSON = JSON.null
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,7 +40,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
                 self.title = title
             }
         }
-
+        
         // Do any additional setup after loading the view.
     }
 
@@ -47,7 +48,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+        
 
     /*
     // MARK: - Navigation

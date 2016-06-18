@@ -11,14 +11,9 @@ import Alamofire
 import SwiftyJSON
 import SDWebImage
 
-class LatestPostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class LatestPostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
 
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var navTutorials: UITabBarItem!
-    @IBOutlet var navGames: UITabBarItem!
-    @IBOutlet var navTech: UITabBarItem!
-    
-    
     
     let latestPosts : String = "http://severallevels.io/wp-json/wp/v2/posts/"
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
@@ -39,8 +34,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
-    func newNews()
-    {
+    func newNews() {
         getPosts(latestPosts)
         self.tableView.reloadData()
         refreshControl.endRefreshing()
