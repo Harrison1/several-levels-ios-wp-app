@@ -77,7 +77,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="240" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aQ6-5k-yml">
-                                <rect key="frame" x="16" y="94" width="343" height="535"/>
+                                <rect key="frame" x="16" y="86" width="343" height="543"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -103,29 +103,12 @@
                                 <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RIe-3V-jSK">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <items>
-                                    <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="kiQ-JD-aih"/>
-                                    <barButtonItem title="Item" id="amt-QP-jKh">
-                                        <connections>
-                                            <action selector="navTutorials:" destination="VUX-pX-wwD" id="8NJ-HH-jkc"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="F06-fl-frx"/>
-                                    <barButtonItem title="Item" id="Ofw-dr-duy"/>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="A6Y-iQ-DFF"/>
-                                    <barButtonItem title="Item" id="YP7-wN-jHs"/>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="ZOB-KC-w4R"/>
-                                    <barButtonItem title="Item" id="5es-NV-zUW"/>
-                                    <barButtonItem width="38" style="plain" systemItem="fixedSpace" id="V95-kW-a4a"/>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="aQ6-5k-yml" firstAttribute="width" secondItem="9wQ-7g-wR1" secondAttribute="height" multiplier="335:667" id="5vH-X2-vwe"/>
                             <constraint firstItem="BMC-Mh-FE6" firstAttribute="top" secondItem="zh6-ph-Ti0" secondAttribute="bottom" id="9sL-rr-pJP"/>
+                            <constraint firstItem="aQ6-5k-yml" firstAttribute="top" secondItem="zh6-ph-Ti0" secondAttribute="bottom" constant="22" id="Jid-nB-Jcg"/>
                             <constraint firstItem="aQ6-5k-yml" firstAttribute="top" secondItem="zh6-ph-Ti0" secondAttribute="bottom" constant="26" id="RfI-Cl-sAx"/>
                             <constraint firstItem="aQ6-5k-yml" firstAttribute="top" secondItem="zh6-ph-Ti0" secondAttribute="bottom" constant="30" id="UAW-5y-Pxi"/>
                             <constraint firstAttribute="leadingMargin" secondItem="aQ6-5k-yml" secondAttribute="leading" id="UdP-Yb-R97"/>
@@ -148,6 +131,7 @@
                                 <exclude reference="z2r-fa-EUT"/>
                                 <exclude reference="5vH-X2-vwe"/>
                                 <exclude reference="RfI-Cl-sAx"/>
+                                <exclude reference="UAW-5y-Pxi"/>
                                 <exclude reference="u1x-Fr-yax"/>
                                 <exclude reference="fJZ-q0-Z5b"/>
                                 <exclude reference="iqs-TX-ayo"/>
@@ -163,7 +147,6 @@
                     <connections>
                         <outlet property="sectionTitle" destination="BMC-Mh-FE6" id="RXW-Xv-nCm"/>
                         <outlet property="tableView" destination="aQ6-5k-yml" id="Abt-n1-CtV"/>
-                        <outlet property="too" destination="RIe-3V-jSK" id="EHx-Xj-OXH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F8V-RN-Zl0" userLabel="First Responder" sceneMemberID="firstResponder"/>

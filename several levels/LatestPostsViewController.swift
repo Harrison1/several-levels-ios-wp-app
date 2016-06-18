@@ -11,11 +11,10 @@ import Alamofire
 import SwiftyJSON
 import SDWebImage
 
-class LatestPostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
+class LatestPostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var hidingNavBarManager: HidingNavigationBarManager?
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var too: UIToolbar!
     @IBOutlet var sectionTitle: UILabel!
     
 //    let extensionView = sectionTitle
@@ -34,16 +33,12 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
-        hidingNavBarManager?.addExtensionView(too)
-        hidingNavBarManager?.refreshControl = refreshControl
-        
-        let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
-        view.backgroundColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
-        self.view.addSubview(view)
+        let statusBgView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        statusBgView.backgroundColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
+        self.view.addSubview(statusBgView)
         
         getPosts(latestPosts)
-        
+                
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -63,39 +58,15 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         refreshControl.endRefreshing()
     }
     
-    @IBAction func navTutorials(sender: UIButton) {
-        getPostsNu(latestPosts)
-        self.tableView.reloadData()
-        refreshControl.endRefreshing()
-    }
+//    @IBAction func navTutorials(sender: UIButton) {
+//        getPostsNu(latestPosts)
+//        self.tableView.reloadData()
+//        refreshControl.endRefreshing()
+//    }
     
 //    if let tabBar = navigationController?.too {
 //        hidingNavBarManager?.manageBottomBar(too)
 //    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        hidingNavBarManager?.viewWillAppear(animated)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        hidingNavBarManager?.viewDidLayoutSubviews()
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        hidingNavBarManager?.viewWillDisappear(animated)
-    }
-    
-    func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
-        hidingNavBarManager?.shouldScrollToTop()
-        
-        return true
-    }
     
     
     func getPosts(getposts : String) {
@@ -217,6 +188,16 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
             let selected = self.json[indexPath.row]
             postScene.viewPost = selected
         }
+        
+    }
+    
+    // MARK: - HidingNavigationBarManagerDelegate
+    
+    func hidingNavigationBarManagerDidChangeState(manager: HidingNavigationBarManager, toState state: HidingNavigationBarState) {
+        
+    }
+    
+    func hidingNavigationBarManagerDidUpdateScrollViewInsets(manager: HidingNavigationBarManager) {
         
     }
     
