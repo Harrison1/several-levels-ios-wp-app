@@ -75,7 +75,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="240" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aQ6-5k-yml">
-                                <rect key="frame" x="20" y="94" width="335" height="530"/>
+                                <rect key="frame" x="20" y="94" width="335" height="535"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -109,16 +109,28 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GyO-N0-gYT">
-                                <rect key="frame" x="20" y="632" width="90" height="30"/>
-                                <state key="normal" title="tutorials"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbn-dP-fzJ">
-                                <rect key="frame" x="142" y="632" width="90" height="30"/>
-                                <state key="normal" title="games"/>
+                                <rect key="frame" x="115" y="632" width="70" height="30"/>
+                                <state key="normal" title="tutorials">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTh-5e-AWj">
-                                <rect key="frame" x="265" y="632" width="90" height="30"/>
-                                <state key="normal" title="tech"/>
+                                <rect key="frame" x="285" y="632" width="70" height="30"/>
+                                <state key="normal" title="tech">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPe-cr-OgV">
+                                <rect key="frame" x="20" y="632" width="70" height="30"/>
+                                <state key="normal" title="home">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbn-dP-fzJ">
+                                <rect key="frame" x="207" y="632" width="70" height="30"/>
+                                <state key="normal" title="games">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -127,7 +139,9 @@
                             <constraint firstItem="aQ6-5k-yml" firstAttribute="top" secondItem="zh6-ph-Ti0" secondAttribute="bottom" constant="26" id="RfI-Cl-sAx"/>
                             <constraint firstItem="aQ6-5k-yml" firstAttribute="top" secondItem="zh6-ph-Ti0" secondAttribute="bottom" constant="30" id="UAW-5y-Pxi"/>
                             <constraint firstAttribute="leadingMargin" secondItem="aQ6-5k-yml" secondAttribute="leading" id="UdP-Yb-R97"/>
+                            <constraint firstItem="rnF-jn-s34" firstAttribute="top" secondItem="aQ6-5k-yml" secondAttribute="bottom" constant="38" id="Zke-MC-20y"/>
                             <constraint firstItem="aQ6-5k-yml" firstAttribute="centerX" secondItem="9wQ-7g-wR1" secondAttribute="centerX" id="aY2-Yf-vo1"/>
+                            <constraint firstItem="rnF-jn-s34" firstAttribute="top" secondItem="aQ6-5k-yml" secondAttribute="bottom" constant="34" id="fJZ-q0-Z5b"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aQ6-5k-yml" secondAttribute="trailing" id="igo-pX-Tyh"/>
                             <constraint firstItem="rnF-jn-s34" firstAttribute="top" secondItem="aQ6-5k-yml" secondAttribute="bottom" constant="57" id="iqs-TX-ayo"/>
                             <constraint firstItem="rnF-jn-s34" firstAttribute="top" secondItem="aQ6-5k-yml" secondAttribute="bottom" constant="43" id="ohg-QD-iPX"/>
@@ -140,7 +154,9 @@
                                 <exclude reference="5vH-X2-vwe"/>
                                 <exclude reference="RfI-Cl-sAx"/>
                                 <exclude reference="u1x-Fr-yax"/>
+                                <exclude reference="fJZ-q0-Z5b"/>
                                 <exclude reference="iqs-TX-ayo"/>
+                                <exclude reference="ohg-QD-iPX"/>
                                 <exclude reference="thb-y2-kxg"/>
                                 <exclude reference="uf7-ND-dGH"/>
                             </mask>
