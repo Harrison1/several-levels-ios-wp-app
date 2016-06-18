@@ -13,7 +13,12 @@ import SDWebImage
 
 class LatestPostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
 
+    var hidingNavBarManager: HidingNavigationBarManager?
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var too: UIToolbar!
+    @IBOutlet var sectionTitle: UILabel!
+    
+//    let extensionView = sectionTitle
     
     let latestPosts : String = "http://severallevels.io/wp-json/wp/v2/posts/"
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
@@ -29,6 +34,14 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
+        hidingNavBarManager?.addExtensionView(too)
+        hidingNavBarManager?.refreshControl = refreshControl
+        
+        let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        view.backgroundColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
+        self.view.addSubview(view)
+        
         getPosts(latestPosts)
         
         tableView.delegate = self
@@ -40,6 +53,10 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        navigationController?.hidesBarsOnSwipe = true
+//    }
+    
     func newNews() {
         getPosts(latestPosts)
         self.tableView.reloadData()
@@ -50,6 +67,34 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         getPostsNu(latestPosts)
         self.tableView.reloadData()
         refreshControl.endRefreshing()
+    }
+    
+//    if let tabBar = navigationController?.too {
+//        hidingNavBarManager?.manageBottomBar(too)
+//    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        hidingNavBarManager?.viewWillAppear(animated)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        hidingNavBarManager?.viewDidLayoutSubviews()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        hidingNavBarManager?.viewWillDisappear(animated)
+    }
+    
+    func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
+        hidingNavBarManager?.shouldScrollToTop()
+        
+        return true
     }
     
     
@@ -160,6 +205,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         
         cell.contentView.addSubview(blackSpaceView)
         cell.contentView.sendSubviewToBack(blackSpaceView)
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

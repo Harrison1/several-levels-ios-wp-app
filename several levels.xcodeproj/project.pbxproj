@@ -11,6 +11,8 @@
 		38504231592D9362BC26CDD8 /* Pods_several_levelsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB2A9FF29CE32FE2EB077DB /* Pods_several_levelsTests.framework */; };
 		79231EFB1D0716A70068348A /* LatestPostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79231EFA1D0716A70068348A /* LatestPostsTableViewCell.swift */; };
 		79231EFD1D071BBF0068348A /* LatestPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79231EFC1D071BBF0068348A /* LatestPostsTableViewController.swift */; };
+		7927F7471D15AEE50036BC65 /* HidingNavigationBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927F7451D15AEE50036BC65 /* HidingNavigationBarManager.swift */; };
+		7927F7481D15AEE50036BC65 /* HidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927F7461D15AEE50036BC65 /* HidingViewController.swift */; };
 		794D794B1D08C646003D5DF3 /* SinglePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794D794A1D08C646003D5DF3 /* SinglePostViewController.swift */; };
 		7951EE271D0F01EB00C63719 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7951EE261D0F01EB00C63719 /* WebViewController.swift */; };
 		79A681DD1D10D5E200452CBF /* LatestPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A681DC1D10D5E200452CBF /* LatestPostsViewController.swift */; };
@@ -49,6 +51,8 @@
 		6DB2A9FF29CE32FE2EB077DB /* Pods_several_levelsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_several_levelsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79231EFA1D0716A70068348A /* LatestPostsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestPostsTableViewCell.swift; sourceTree = "<group>"; };
 		79231EFC1D071BBF0068348A /* LatestPostsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestPostsTableViewController.swift; sourceTree = "<group>"; };
+		7927F7451D15AEE50036BC65 /* HidingNavigationBarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HidingNavigationBarManager.swift; sourceTree = "<group>"; };
+		7927F7461D15AEE50036BC65 /* HidingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HidingViewController.swift; sourceTree = "<group>"; };
 		794D794A1D08C646003D5DF3 /* SinglePostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePostViewController.swift; sourceTree = "<group>"; };
 		7951EE261D0F01EB00C63719 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		79A681DC1D10D5E200452CBF /* LatestPostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestPostsViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 				79FFC1621D06363B0038E099 /* Assets.xcassets */,
 				79FFC1641D06363B0038E099 /* LaunchScreen.storyboard */,
 				79FFC1671D06363B0038E099 /* Info.plist */,
+				7927F7451D15AEE50036BC65 /* HidingNavigationBarManager.swift */,
+				7927F7461D15AEE50036BC65 /* HidingViewController.swift */,
 				79231EFA1D0716A70068348A /* LatestPostsTableViewCell.swift */,
 				79231EFC1D071BBF0068348A /* LatestPostsTableViewController.swift */,
 				794D794A1D08C646003D5DF3 /* SinglePostViewController.swift */,
@@ -447,8 +453,10 @@
 			files = (
 				794D794B1D08C646003D5DF3 /* SinglePostViewController.swift in Sources */,
 				79FFC15C1D06363B0038E099 /* AppDelegate.swift in Sources */,
+				7927F7481D15AEE50036BC65 /* HidingViewController.swift in Sources */,
 				79231EFB1D0716A70068348A /* LatestPostsTableViewCell.swift in Sources */,
 				79A681DD1D10D5E200452CBF /* LatestPostsViewController.swift in Sources */,
+				7927F7471D15AEE50036BC65 /* HidingNavigationBarManager.swift in Sources */,
 				79A681DF1D10DDEF00452CBF /* LatestPostsCell.swift in Sources */,
 				7951EE271D0F01EB00C63719 /* WebViewController.swift in Sources */,
 				79231EFD1D071BBF0068348A /* LatestPostsTableViewController.swift in Sources */,
