@@ -17,6 +17,12 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
     
     let latestPosts : String = "http://severallevels.io/wp-json/wp/v2/posts/"
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
+    
+    let parametersNu : [String:AnyObject] = [
+        "filter[category_name]" : "tutorials",
+        "filter[posts_per_page]" : 5
+    ]
+    
     var json : JSON = JSON.null
     lazy var refreshControl: UIRefreshControl = UIRefreshControl()
     
@@ -40,10 +46,31 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         refreshControl.endRefreshing()
     }
     
+    @IBAction func navTutorials(sender: UIButton) {
+        getPostsNu(latestPosts)
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+    
     
     func getPosts(getposts : String) {
         
         Alamofire.request(.GET, getposts, parameters: parameters).responseJSON { response in
+            
+            guard let data = response.result.value else{
+                print("Request failed with error")
+                return
+            }
+            
+            self.json = JSON(data)
+            self.tableView.reloadData()
+            
+        }
+    }
+    
+    func getPostsNu(getposts : String) {
+        
+        Alamofire.request(.GET, getposts, parameters: parametersNu).responseJSON { response in
             
             guard let data = response.result.value else{
                 print("Request failed with error")
