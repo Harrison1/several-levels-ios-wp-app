@@ -15,17 +15,24 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var sectionTitle: UILabel!
-    
-//    let extensionView = sectionTitle
-    
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     let latestPosts : String = "http://severallevels.io/wp-json/wp/v2/posts/"
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
     
-    let parametersNu : [String:AnyObject] = [
+    let parametersTutorials : [String:AnyObject] = [
         "filter[category_name]" : "tutorials",
-        "filter[posts_per_page]" : 5
+        "filter[posts_per_page]" : 100
+    ]
+    
+    let parametersGames : [String:AnyObject] = [
+        "filter[category_name]" : "games",
+        "filter[posts_per_page]" : 100
+    ]
+    
+    let parametersTech : [String:AnyObject] = [
+        "filter[category_name]" : "tech",
+        "filter[posts_per_page]" : 100
     ]
     
     var json : JSON = JSON.null
@@ -34,27 +41,59 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        segmentedControl.setTitleTextAttributes([NSFontAttributeName:UIFont(name:"Helvetica Neue", size:13.0)!,NSForegroundColorAttributeName:UIColor.whiteColor()], forState:UIControlState.Normal)
+//        
+//        segmentedControl.setTitleTextAttributes([NSFontAttributeName:UIFont(name:"Helvetica Neue", size:13.0)!,NSForegroundColorAttributeName:UIColor.whiteColor()], forState:UIControlState.Selected)
+//        
+//        segmentedControl.setDividerImage(self.imageWithColor(UIColor.clearColor()), forLeftSegmentState: UIControlState.Normal, rightSegmentState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
+//        
+//        segmentedControl.setBackgroundImage(self.imageWithColor(UIColor.clearColor()), forState:UIControlState.Normal, barMetrics:UIBarMetrics.Default)
+//        
+//        segmentedControl.setBackgroundImage(self.imageWithColor(UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha:1.0)), forState:UIControlState.Selected, barMetrics:UIBarMetrics.Default);
+//        
+//        for  borderview in segmentedControl.subviews {
+//            
+//            let upperBorder: CALayer = CALayer()
+//            upperBorder.backgroundColor = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).CGColor
+//            upperBorder.frame = CGRectMake(0, borderview.frame.size.height-1, borderview.frame.size.width, 1.0);
+//            borderview.layer .addSublayer(upperBorder);
+//            
+//        }
+
+        
+        
+        
         let statusBgView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
         statusBgView.backgroundColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
         self.view.addSubview(statusBgView)
         
-        getPosts(latestPosts)
+        getPosts(latestPosts, params: parameters)
                 
         tableView.delegate = self
         tableView.dataSource = self
         
         refreshControl.tintColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
-        refreshControl.addTarget(self, action: #selector(LatestPostsViewController.newNews), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(LatestPostsViewController.refreshTable), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
         
     }
     
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        navigationController?.hidesBarsOnSwipe = true
+//    func imageWithColor(color: UIColor) -> UIImage {
+//        
+//        let rect = CGRectMake(0.0, 0.0, 1.0, segmentedControl.frame.size.height)
+//        UIGraphicsBeginImageContext(rect.size)
+//        let context = UIGraphicsGetCurrentContext()
+//        CGContextSetFillColorWithColor(context, color.CGColor);
+//        CGContextFillRect(context, rect);
+//        let image = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//        return image
+//        
 //    }
     
-    func newNews() {
-        getPosts(latestPosts)
+    func navLatest() {
+        getPosts(latestPosts, params: parameters)
+        tableView.setContentOffset(CGPointZero, animated:false)
         self.tableView.reloadData()
         refreshControl.endRefreshing()
         sectionTitle.text = "the latest"
@@ -62,57 +101,68 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
     
     
     func navTutorials() {
-        getPostsNu(latestPosts)
+        getPosts(latestPosts, params: parametersTutorials)
+        tableView.setContentOffset(CGPointZero, animated:false)
         self.tableView.reloadData()
         refreshControl.endRefreshing()
         sectionTitle.text = "tutorials"
     }
     
-    @IBAction func segmentedNavigation(sender: UISegmentedControl) {
-        switch segmentedControl.selectedSegmentIndex
-        {
+    func navGames() {
+        getPosts(latestPosts, params: parametersGames)
+        tableView.setContentOffset(CGPointZero, animated:false)
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+        sectionTitle.text = "games"
+    }
+    
+    func navTech() {
+        getPosts(latestPosts, params: parametersTech)
+        tableView.setContentOffset(CGPointZero, animated:false)
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+        sectionTitle.text = "tech"
+    }
+    
+    func refreshTable() {
+        switch segmentedControl.selectedSegmentIndex {
         case 0:
-            newNews()
+            navLatest()
         case 1:
             navTutorials()
         case 2:
-            print("hello games")
+            navGames()
         case 3:
-            print("hello tech")
+            navTech()
+        default:
+            break
+        }
+        
+    }
+    
+    @IBAction func segmentedNavigation(sender: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            navLatest()
+        case 1:
+            navTutorials()
+        case 2:
+            navGames()
+        case 3:
+            navTech()
         default:
             break
         }
     }
-//    if let tabBar = navigationController?.too {
-//        hidingNavBarManager?.manageBottomBar(too)
-//    }
     
-    
-    func getPosts(getposts : String) {
+    func getPosts(getposts : String, params: AnyObject) {
         
-        Alamofire.request(.GET, getposts, parameters: parameters).responseJSON { response in
+        Alamofire.request(.GET, getposts, parameters: params as? [String : AnyObject]).responseJSON { response in
             
             guard let data = response.result.value else{
                 print("Request failed with error")
                 return
             }
-            
-            self.json = JSON(data)
-            self.tableView.reloadData()
-            
-        }
-    }
-    
-    func getPostsNu(getposts : String) {
-        
-        Alamofire.request(.GET, getposts, parameters: parametersNu).responseJSON { response in
-            
-            guard let data = response.result.value else{
-                print("Request failed with error")
-                return
-            }
-            
-            self.tableView.setContentOffset(CGPointZero, animated: false)
             
             self.json = JSON(data)
             self.tableView.reloadData()
