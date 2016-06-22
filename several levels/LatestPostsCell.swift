@@ -18,6 +18,7 @@ class LatestPostsCell: UITableViewCell {
     lazy var postD: UILabel = UILabel()
     lazy var postI: UIImageView = UIImageView()
     lazy var postR: UILabel = UILabel()
+    lazy var postC: UILabel = UILabel()
     
     lazy var padding : CGFloat = 20;
     
@@ -81,6 +82,13 @@ class LatestPostsCell: UITableViewCell {
         postD.font = UIFont(name: postD.font.fontName, size: 12)
         postD.textAlignment = NSTextAlignment.Left
         self.contentView.addSubview(postD)
+        
+        postC.frame = CGRectMake(10, 25 + postI.frame.size.height + postT.frame.height, , 20)
+        postC.textColor = UIColor.whiteColor()
+        postC.backgroundColor = UIColor.redColor()
+        postC.font = UIFont(name: postC.font.fontName, size: 14)
+        postC.textAlignment = NSTextAlignment.Left
+        self.contentView.addSubview(postC)
         
         postR.frame = CGRectMake(0, padding + 47 + postI.frame.size.height + postD.frame.size.height, self.contentView.frame.size.width/1.2, 3)
         postR.backgroundColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)

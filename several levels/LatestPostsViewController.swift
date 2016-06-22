@@ -194,6 +194,10 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
             cell.postT.text = title
         }
         
+        if let category = self.json[row]["post_category"][0]["name"].string {
+            cell.postC.text = "   " + category
+        }
+        
         //Make sure post date is a string
         if self.json[row]["date"].string != nil {
             
