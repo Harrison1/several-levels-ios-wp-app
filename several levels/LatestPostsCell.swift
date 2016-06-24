@@ -83,7 +83,7 @@ class LatestPostsCell: UITableViewCell {
         postD.textAlignment = NSTextAlignment.Left
         self.contentView.addSubview(postD)
         
-        postC.frame = CGRectMake(10, 25 + postI.frame.size.height + postT.frame.height, , 20)
+        postC.frame = CGRectMake(10, 25 + postI.frame.size.height + postT.frame.height, 100, 20)
         postC.textColor = UIColor.whiteColor()
         postC.backgroundColor = UIColor.redColor()
         postC.font = UIFont(name: postC.font.fontName, size: 14)

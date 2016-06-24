@@ -13,7 +13,7 @@ import SDWebImage
 
 class LatestPostsTableViewController: UITableViewController {
     
-    let latestPosts : String = "http://severallevels.io/wp-json/wp/v2/posts/"
+    let latestPosts : String = "https://severallevels.io/wp-json/wp/v2/posts/"
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
     var json : JSON = JSON.null
 
