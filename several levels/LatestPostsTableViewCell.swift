@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import QuartzCore
 
 class LatestPostsTableViewCell: UITableViewCell {
     
-    @IBOutlet var postTitle: UILabel!
-    @IBOutlet var postDate: UILabel!
-    @IBOutlet var postImage: UIImageView!
-    
 
+    @IBOutlet var postImage: UIImageView!
+
+    @IBOutlet var postTitle: UILabel!
+    
+    @IBOutlet var postDate: UILabel!
+    
+    @IBOutlet var mainView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -16,6 +16,8 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet var tableView: UITableView!
     @IBOutlet var sectionTitle: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    var preventAnimationv = Set<NSIndexPath>()
+
     
     let latestPosts : String = "https://severallevels.io/wp-json/wp/v2/posts/"
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
@@ -40,6 +42,9 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.hidesBarsOnSwipe = true
+
         
 //        segmentedControl.setTitleTextAttributes([NSFontAttributeName:UIFont(name:"Helvetica Neue", size:13.0)!,NSForegroundColorAttributeName:UIColor.whiteColor()], forState:UIControlState.Normal)
 //        
@@ -250,6 +255,11 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         cell.contentView.addSubview(blackSpaceView)
         cell.contentView.sendSubviewToBack(blackSpaceView)
         
+                if !preventAnimationv.contains(indexPath) {
+                    preventAnimationv.insert(indexPath)
+                    TipInCellAnimator.animate(cell)
+                }
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -264,15 +274,22 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
+//    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//        if !preventAnimation.contains(indexPath) {
+//            preventAnimation.insert(indexPath)
+//            TipInCellAnimator.animate(cell)
+//        }
+//    }
+    
     // MARK: - HidingNavigationBarManagerDelegate
     
-    func hidingNavigationBarManagerDidChangeState(manager: HidingNavigationBarManager, toState state: HidingNavigationBarState) {
-        
-    }
-    
-    func hidingNavigationBarManagerDidUpdateScrollViewInsets(manager: HidingNavigationBarManager) {
-        
-    }
+//    func hidingNavigationBarManagerDidChangeState(manager: HidingNavigationBarManager, toState state: HidingNavigationBarState) {
+//        
+//    }
+//    
+//    func hidingNavigationBarManagerDidUpdateScrollViewInsets(manager: HidingNavigationBarManager) {
+//        
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
