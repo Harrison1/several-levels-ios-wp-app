@@ -17,7 +17,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet var tableView: UITableView!
     var preventAnimationv = Set<NSIndexPath>()
 
-    @IBOutlet var scrollV: UIScrollView!
+    //@IBOutlet var scrollV: UIScrollView!
     
     @IBOutlet var segmentedControl: UISegmentedControl!
     
@@ -50,7 +50,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scrollV.delegate = self
+        //scrollV.delegate = self
         
         //navigationController?.hidesBarsOnSwipe = true
         
@@ -87,6 +87,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         refreshControl.tintColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
         refreshControl.addTarget(self, action: #selector(LatestPostsViewController.refreshTable), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
+//        scrollV.addSubview(refreshControl)
         
 //        let extensionView = UIView(frame: CGRectMake(0, 0, view.frame.size.width, 40))
 //        extensionView.layer.borderColor = UIColor.lightGrayColor().CGColor
