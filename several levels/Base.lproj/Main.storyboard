@@ -12,7 +12,7 @@
             <objects>
                 <tableViewController id="srl-zW-oFF" customClass="LatestPostsTableViewController" customModule="several_levels" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="276" sectionHeaderHeight="28" sectionFooterHeight="28" id="7ks-gR-izB">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -146,12 +146,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dg7-XS-ppV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="937.5" y="902.5"/>
+            <point key="canvasLocation" x="950.5" y="493.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VaV-yJ-JHK">
             <objects>
-                <navigationController hidesBarsOnSwipe="YES" id="ZtO-Tv-QIH" sceneMemberID="viewController">
+                <navigationController id="ZtO-Tv-QIH" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4hQ-ur-A35">
@@ -163,7 +163,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="srl-zW-oFF" kind="relationship" relationship="rootViewController" id="orN-nt-F62"/>
+                        <segue destination="VUX-pX-wwD" kind="relationship" relationship="rootViewController" id="yWJ-d8-eFP"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jWI-OI-Uto" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -203,6 +203,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="8pY-7d-RjM" kind="show" id="Xng-JK-DLO"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -294,4 +297,7 @@
         <image name="tech" width="24" height="24"/>
         <image name="tutorials" width="24" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Xng-JK-DLO"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -18,7 +18,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     var preventAnimationv = Set<NSIndexPath>()
 
-    var resultSearchController:UISearchController!
+    var hidingNavBarManager: HidingNavigationBarManager?
     
     let latestPosts : String = "https://severallevels.io/wp-json/wp/v2/posts/"
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
@@ -70,18 +70,30 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         
         
         
-        let statusBgView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
-        statusBgView.backgroundColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
-        self.view.addSubview(statusBgView)
+//        let statusBgView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+//        statusBgView.backgroundColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
+//        self.view.addSubview(statusBgView)
         
-        getPosts(latestPosts, params: parameters)
-                
         tableView.delegate = self
         tableView.dataSource = self
         
         refreshControl.tintColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
         refreshControl.addTarget(self, action: #selector(LatestPostsViewController.refreshTable), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
+        
+        let extensionView = UIView(frame: CGRectMake(0, 0, view.frame.size.width, 80))
+        extensionView.layer.borderColor = UIColor.lightGrayColor().CGColor
+        extensionView.layer.borderWidth = 1
+        extensionView.backgroundColor = UIColor(white: 230/255, alpha: 1)
+        let label = UILabel(frame: extensionView.frame)
+        label.text = "Extension View"
+        label.textAlignment = NSTextAlignment.Center
+        extensionView.addSubview(label)
+        
+        hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
+        hidingNavBarManager?.addExtensionView(extensionView)
+        
+        getPosts(latestPosts, params: parameters)
         
     }
     
