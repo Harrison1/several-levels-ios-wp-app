@@ -14,10 +14,10 @@ import SDWebImage
 class LatestPostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var sectionTitle: UILabel!
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
     var preventAnimationv = Set<NSIndexPath>()
 
+    @IBOutlet var segmentedControl: UISegmentedControl!
+//    @IBOutlet var extensionView: UIView!
     var hidingNavBarManager: HidingNavigationBarManager?
     
     let latestPosts : String = "https://severallevels.io/wp-json/wp/v2/posts/"
@@ -81,13 +81,21 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         refreshControl.addTarget(self, action: #selector(LatestPostsViewController.refreshTable), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
         
-        let extensionView = UIView(frame: CGRectMake(0, 0, view.frame.size.width, 80))
+        let extensionView = UIView(frame: CGRectMake(0, 0, view.frame.size.width, 40))
         extensionView.layer.borderColor = UIColor.lightGrayColor().CGColor
         extensionView.layer.borderWidth = 1
         extensionView.backgroundColor = UIColor(white: 230/255, alpha: 1)
         let label = UILabel(frame: extensionView.frame)
         label.text = "Extension View"
         label.textAlignment = NSTextAlignment.Center
+//        let items = ["Purple", "Green", "Blue"]
+//        let customSC = UISegmentedControl(items: items)
+//        customSC.selectedSegmentIndex = 0
+//        let frame = UIScreen.mainScreen().bounds
+//        customSC.frame = CGRectMake(0, 0, frame.width - 20, 30)
+//        customSC.layer.cornerRadius = 5.0  // Don't let background bleed
+//        customSC.backgroundColor = UIColor.blackColor()
+//        customSC.tintColor = UIColor.whiteColor()
         extensionView.addSubview(label)
         
         hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
@@ -115,7 +123,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         tableView.setContentOffset(CGPointZero, animated:false)
         self.tableView.reloadData()
         refreshControl.endRefreshing()
-        sectionTitle.text = "the latest"
+        //sectionTitle.text = "the latest"
     }
     
     
@@ -124,7 +132,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         tableView.setContentOffset(CGPointZero, animated:false)
         self.tableView.reloadData()
         refreshControl.endRefreshing()
-        sectionTitle.text = "tutorials"
+        //sectionTitle.text = "tutorials"
     }
     
     func navGames() {
@@ -132,7 +140,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         tableView.setContentOffset(CGPointZero, animated:false)
         self.tableView.reloadData()
         refreshControl.endRefreshing()
-        sectionTitle.text = "games"
+        //sectionTitle.text = "games"
     }
     
     func navTech() {
@@ -140,7 +148,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         tableView.setContentOffset(CGPointZero, animated:false)
         self.tableView.reloadData()
         refreshControl.endRefreshing()
-        sectionTitle.text = "tech"
+        //sectionTitle.text = "tech"
     }
     
     func refreshTable() {
