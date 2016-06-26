@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 let view = UIView(frame: CGRectMake(0, 0, rootViewController.view.bounds.width, 20))
                 
-                view.backgroundColor = UIColor.redColor()
+                view.backgroundColor = UIColor(red: 39.0/255.0, green: 207.0/255.0, blue: 230.0/255.0, alpha: 1.0)
                 
                 rootViewController.view.addSubview(view)
             }
