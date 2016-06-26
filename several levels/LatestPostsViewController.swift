@@ -11,12 +11,18 @@ import Alamofire
 import SwiftyJSON
 import SDWebImage
 
-class LatestPostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class LatestPostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
 
+    @IBOutlet var toolbar: UIToolbar!
     @IBOutlet var tableView: UITableView!
     var preventAnimationv = Set<NSIndexPath>()
 
+    @IBOutlet var scrollV: UIScrollView!
+    
     @IBOutlet var segmentedControl: UISegmentedControl!
+    
+    var lastOffsetY :CGFloat = 0
+
 //    @IBOutlet var extensionView: UIView!
     var hidingNavBarManager: HidingNavigationBarManager?
     
@@ -43,9 +49,10 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-//        navigationController?.hidesBarsOnSwipe = true
+        scrollV.delegate = self
+        
+        //navigationController?.hidesBarsOnSwipe = true
         
         
 //        segmentedControl.setTitleTextAttributes([NSFontAttributeName:UIFont(name:"Helvetica Neue", size:13.0)!,NSForegroundColorAttributeName:UIColor.whiteColor()], forState:UIControlState.Normal)
@@ -81,13 +88,13 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
         refreshControl.addTarget(self, action: #selector(LatestPostsViewController.refreshTable), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
         
-        let extensionView = UIView(frame: CGRectMake(0, 0, view.frame.size.width, 40))
-        extensionView.layer.borderColor = UIColor.lightGrayColor().CGColor
-        extensionView.layer.borderWidth = 1
-        extensionView.backgroundColor = UIColor(white: 230/255, alpha: 1)
-        let label = UILabel(frame: extensionView.frame)
-        label.text = "Extension View"
-        label.textAlignment = NSTextAlignment.Center
+//        let extensionView = UIView(frame: CGRectMake(0, 0, view.frame.size.width, 40))
+//        extensionView.layer.borderColor = UIColor.lightGrayColor().CGColor
+//        extensionView.layer.borderWidth = 1
+//        extensionView.backgroundColor = UIColor(white: 230/255, alpha: 1)
+//        let label = UILabel(frame: extensionView.frame)
+//        label.text = "Extension View"
+//        label.textAlignment = NSTextAlignment.Center
 //        let items = ["Purple", "Green", "Blue"]
 //        let customSC = UISegmentedControl(items: items)
 //        customSC.selectedSegmentIndex = 0
@@ -96,10 +103,10 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
 //        customSC.layer.cornerRadius = 5.0  // Don't let background bleed
 //        customSC.backgroundColor = UIColor.blackColor()
 //        customSC.tintColor = UIColor.whiteColor()
-        extensionView.addSubview(label)
+//        extensionView.addSubview(label)
         
-        hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
-        hidingNavBarManager?.addExtensionView(extensionView)
+//        hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
+//        hidingNavBarManager?.addExtensionView(extensionView)
         
         getPosts(latestPosts, params: parameters)
         
@@ -117,6 +124,21 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
 //        return image
 //        
 //    }
+    
+    
+    //Delegate Methods
+    func scrollViewWillBeginDragging(scrollView: UIScrollView){
+        lastOffsetY = scrollView.contentOffset.y
+        let hide = scrollView.contentOffset.y > self.lastOffsetY
+        self.navigationController?.setNavigationBarHidden(hide, animated: true)
+
+    }
+    
+    func scrollViewWillBeginDecelerating(scrollView: UIScrollView){
+        let hide = scrollView.contentOffset.y > self.lastOffsetY
+        self.navigationController?.setNavigationBarHidden(hide, animated: true)
+        //toolbar.hidden = hide
+    }
     
     func navLatest() {
         getPosts(latestPosts, params: parameters)
