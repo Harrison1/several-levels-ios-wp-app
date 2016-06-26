@@ -21,6 +21,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         // Override point for customization after application launch.
+        
+        // Add a view in back of status bar text (needed when UINavigationBar is hidden)
+        if let window = self.window {
+            
+            if let rootViewController = window.rootViewController {
+                
+                let view = UIView(frame: CGRectMake(0, 0, rootViewController.view.bounds.width, 20))
+                
+                view.backgroundColor = UIColor.redColor()
+                
+                rootViewController.view.addSubview(view)
+            }
+        }
+        
         return true
     }
 

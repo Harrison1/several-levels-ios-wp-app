@@ -18,6 +18,7 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     var preventAnimationv = Set<NSIndexPath>()
 
+    var resultSearchController:UISearchController!
     
     let latestPosts : String = "https://severallevels.io/wp-json/wp/v2/posts/"
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
@@ -39,12 +40,13 @@ class LatestPostsViewController: UIViewController, UITableViewDataSource, UITabl
     
     var json : JSON = JSON.null
     lazy var refreshControl: UIRefreshControl = UIRefreshControl()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationController?.hidesBarsOnSwipe = true
 
+        
+//        navigationController?.hidesBarsOnSwipe = true
+        
         
 //        segmentedControl.setTitleTextAttributes([NSFontAttributeName:UIFont(name:"Helvetica Neue", size:13.0)!,NSForegroundColorAttributeName:UIColor.whiteColor()], forState:UIControlState.Normal)
 //        
