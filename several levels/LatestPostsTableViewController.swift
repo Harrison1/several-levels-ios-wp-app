@@ -18,8 +18,14 @@ class LatestPostsTableViewController: UITableViewController {
     
     let tuts: String = "https://severallevels.io/wp-json/wp/v2/posts//?filter[category_name]=tutorials"
     
+    @IBOutlet var navBarTitle: UINavigationItem!
     @IBOutlet var controller: UIBarButtonItem!
+    let icbackImg: UIImage = UIImage(named: "ic_background")!
+    let icbackImgClear: UIImage = UIImage(named: "ic_clear_background")!
+
+    @IBOutlet var homeButtonIcon: UIBarButtonItem!
     
+    @IBOutlet var sortTutorialsIcon: UIBarButtonItem!
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
     var json : JSON = JSON.null
     var preventAnimation = Set<NSIndexPath>()
@@ -39,9 +45,9 @@ class LatestPostsTableViewController: UITableViewController {
         
 //        let backImg: UIImage = UIImage(named: "Home")!
 //        controller.setBackgroundImage(backImg, forState: .Normal, barMetrics: .Default)
-        let barButton = UIBarButtonItem(image: UIImage(named: "Home"), landscapeImagePhone: nil, style: .Done, target: self, action: #selector(newNews))
+//        let barButton = UIBarButtonItem(image: UIImage(named: "Home"), landscapeImagePhone: nil, style: .Done, target: self, action: #selector(newNews))
         //self.navigationItem.leftBarButtonItem = barButton
-        self.toolbarItems?.append(barButton)
+//        self.toolbarItems?.append(barButton)
         
 //        controller.target.self
 //        controller.action("sayHello")
@@ -73,7 +79,8 @@ class LatestPostsTableViewController: UITableViewController {
         getPosts(latestPosts)
         self.tableView.reloadData()
         refreshControl?.endRefreshing()
-    }    
+        navBarTitle.title = "the latest"
+    }
     
     @IBAction func sortTutorials(sender: UIBarButtonItem) {
         tableView.hidden = true
@@ -83,6 +90,17 @@ class LatestPostsTableViewController: UITableViewController {
             self.getPosts(self.tuts)
             self.tableView.hidden = false
         }
+        navBarTitle.title = "tutorials"
+        sortTutorialsIcon.tintColor = UIColor.whiteColor()
+        homeButtonIcon.tintColor = UIColor(red: 188/255, green: 228/255, blue: 255/255, alpha: 1)
+    }
+    @IBAction func homeBUtton(sender: AnyObject) {
+        getPosts(latestPosts)
+        self.tableView.reloadData()
+        refreshControl?.endRefreshing()
+        navBarTitle.title = "the latest"
+        sortTutorialsIcon.tintColor = UIColor(red: 188/255, green: 228/255, blue: 255/255, alpha: 1)
+        homeButtonIcon.tintColor = UIColor.whiteColor()
     }
     
     func delay(delay: Double, closure: ()->()) {

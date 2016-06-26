@@ -89,12 +89,15 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="7DM-fT-wwS"/>
-                        <barButtonItem image="Home" id="G9k-7I-PGL">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <barButtonItem image="home" id="G9k-7I-PGL">
+                            <color key="tintColor" red="0.73725490199999999" green="0.89411764709999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="homeBUtton:" destination="srl-zW-oFF" id="LNN-Ha-7Wv"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="YJT-4P-mnd"/>
                         <barButtonItem image="tutorials" id="U9p-w5-Avj">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" red="0.73725490196078436" green="0.89411764705882346" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="sortTutorials:" destination="srl-zW-oFF" id="VSC-uI-JGj"/>
                             </connections>
@@ -115,6 +118,9 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="controller" destination="zBg-ia-GAJ" id="Jvr-Iz-Dh8"/>
+                        <outlet property="homeButtonIcon" destination="G9k-7I-PGL" id="Rr3-2U-1U4"/>
+                        <outlet property="navBarTitle" destination="8Zw-ih-PPD" id="pHK-yY-GvM"/>
+                        <outlet property="sortTutorialsIcon" destination="U9p-w5-Avj" id="DPi-kA-p3q"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Vm-x9-wmx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -195,9 +201,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Home" width="24" height="24"/>
-        <image name="games" width="24" height="24"/>
-        <image name="tech" width="24" height="24"/>
-        <image name="tutorials" width="24" height="24"/>
+        <image name="games" width="36" height="36"/>
+        <image name="home" width="36" height="36"/>
+        <image name="tech" width="36" height="36"/>
+        <image name="tutorials" width="36" height="36"/>
     </resources>
 </document>
