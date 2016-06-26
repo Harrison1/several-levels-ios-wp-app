@@ -13,40 +13,88 @@ import SDWebImage
 
 class LatestPostsTableViewController: UITableViewController {
     
+
     let latestPosts : String = "https://severallevels.io/wp-json/wp/v2/posts/"
+    
+    let tuts: String = "https://severallevels.io/wp-json/wp/v2/posts//?filter[category_name]=tutorials"
+    
+    @IBOutlet var controller: UIBarButtonItem!
+    
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
     var json : JSON = JSON.null
     var preventAnimation = Set<NSIndexPath>()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
 //        self.tableView.backgroundView = UIImageView(image:UIImage(named:"background"))
         
-        getPosts(latestPosts)
+        
+        //create a new button
+        //let button: UIButton = UIButtonType(rawValue: UIButtonType.Custom)
+        //set image for button
+        //button.setImage(UIImage(named: "fb.png"), forState: UIControlState.Normal)
+        //add function for button
+        
+//        let backImg: UIImage = UIImage(named: "Home")!
+//        controller.setBackgroundImage(backImg, forState: .Normal, barMetrics: .Default)
+        let barButton = UIBarButtonItem(image: UIImage(named: "Home"), landscapeImagePhone: nil, style: .Done, target: self, action: #selector(newNews))
+        //self.navigationItem.leftBarButtonItem = barButton
+        self.toolbarItems?.append(barButton)
+        
+//        controller.target.self
+//        controller.action("sayHello")
+//        
+//        button.addTarget(self, action: "fbButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+//        //set frame
+//        button.frame = CGRectMake(0, 0, 53, 31)
+//        
+//        let barButton = UIBarButtonItem(customView: button)
+//        //assign button to navigationbar
+//        self.navigationItem.rightBarButtonItem = barButton
+        
+        
+        
         
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
         refreshControl.addTarget(self, action: #selector(LatestPostsTableViewController.newNews), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
         
+        getPosts(latestPosts)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-    
-//    override func prefersStatusBarHidden() -> Bool {
-//        return navigationController?.navigationBarHidden ?? false
-//    }
     
     func newNews() {
         getPosts(latestPosts)
         self.tableView.reloadData()
         refreshControl?.endRefreshing()
+    }    
+    
+    @IBAction func sortTutorials(sender: UIBarButtonItem) {
+        tableView.hidden = true
+        self.tableView.setContentOffset(CGPointZero, animated:false)
+        delay(0.25) {
+            self.preventAnimation.removeAll()
+            self.getPosts(self.tuts)
+            self.tableView.hidden = false
+        }
     }
     
+    func delay(delay: Double, closure: ()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(),
+            closure
+        )
+    }
     
     func getPosts(getposts : String) {
         
@@ -131,14 +179,6 @@ class LatestPostsTableViewController: UITableViewController {
         return cell
     }
     
-//    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let vw = UIView()
-//        vw.backgroundColor = UIColor.greenColor()
-//        
-//        return vw
-//    }
-    
-
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // which view controller to send to 

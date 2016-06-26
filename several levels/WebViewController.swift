@@ -26,10 +26,6 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         // set user agent
         NSUserDefaults.standardUserDefaults().registerDefaults(["UserAgent": "several-levels"])
         
-        let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
-        view.backgroundColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
-        self.view.addSubview(view)
-        
         navigationController?.hidesBarsOnSwipe = true
         
         // make sure post url is as string
