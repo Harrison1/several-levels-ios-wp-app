@@ -25,6 +25,8 @@ class LatestPostsTableViewController: UITableViewController {
     
     let imagePlaceHolder : UIImage = UIImage(named: "placeholder")!
     
+    let homy: UIImage = UIImage(named: "home")!
+    
     
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
     
@@ -68,6 +70,44 @@ class LatestPostsTableViewController: UITableViewController {
 //        self.setLoadingScreen()
         
         loadData()
+        
+        
+        
+        //        self.tableView.backgroundView = UIImageView(image:UIImage(named:"background"))
+        
+        
+        //create a new button
+        //let button: UIButton = UIButtonType(rawValue: UIButtonType.Custom)
+        //set image for button
+        //button.setImage(UIImage(named: "fb.png"), forState: UIControlState.Normal)
+        //add function for button
+        
+        //        let backImg: UIImage = UIImage(named: "Home")!
+        //        controller.setBackgroundImage(backImg, forState: .Normal, barMetrics: .Default)
+        let barButton = UIBarButtonItem(image: UIImage(named: "home"), landscapeImagePhone: nil, style: .Done, target: self, action: #selector(loadData))
+        //self.navigationItem.leftBarButtonItem = barButton
+        
+        let items = [homy, "Green", "Blue"]
+        let customSC = UISegmentedControl(items: items)
+        customSC.selectedSegmentIndex = 0
+        
+        let frame = UIScreen.mainScreen().bounds
+        customSC.frame = CGRectMake(0, 0, frame.width - 20, 34)
+        
+        let butt = UIBarButtonItem(customView: customSC)
+        
+        self.toolbarItems?.append(butt)
+        
+        //        controller.target.self
+        //        controller.action("sayHello")
+        //
+        //        button.addTarget(self, action: "fbButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        //        //set frame
+        //        button.frame = CGRectMake(0, 0, 53, 31)
+        //
+        //        let barButton = UIBarButtonItem(customView: button)
+        //        //assign button to navigationbar
+        //        self.navigationItem.rightBarButtonItem = barButton
         
     }
     
