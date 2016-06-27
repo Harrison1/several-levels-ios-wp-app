@@ -63,15 +63,14 @@ class LatestPostsTableViewController: UITableViewController {
         refreshControl.addTarget(self, action: #selector(LatestPostsTableViewController.loadData), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
         
-        self.setLoadingScreen()
-                
+//        self.setLoadingScreen()
+        
         loadData()
         
     }
     
     func loadData() {
         self.tableView.setContentOffset(CGPointZero, animated:false)
-        self.setLoadingScreen()
         self.preventAnimation.removeAll()
         self.getPosts(self.latestPosts, params: self.parameters)
         self.tableView.reloadData()
@@ -80,10 +79,7 @@ class LatestPostsTableViewController: UITableViewController {
         sortTutorialsIcon.tintColor = inactiveColor
         sortGamesIcon.tintColor = inactiveColor
         sortTechIcon.tintColor = inactiveColor
-        
-        delay(1) {
-            self.removeLoadingScreen()
-        }
+        self.refreshControl?.endRefreshing()
     }
     
     @IBAction func homeButton(sender: AnyObject) {
