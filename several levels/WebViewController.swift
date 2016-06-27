@@ -33,7 +33,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     
     func loadPage() {
         if let postLink = self.viewPost["link"].string {
-            funcToCallWhenStartLoadingYourWebview()
+//            funcToCallWhenStartLoadingYourWebview()
             
             // convert url stirng to NSURL object
             let requestURL = NSURL(string: postLink)
@@ -51,7 +51,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
                 self.title = title
             }
             
-            funcToCallCalledWhenUIWebViewFinishesLoading()
+//            funcToCallCalledWhenUIWebViewFinishesLoading()
             
             
         }
@@ -62,29 +62,26 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func webViewDidStartLoad(webView: UIWebView) {
+        startProgressBar()
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        endProgresBar()
+    }
+    
     @IBAction func refresh(sender: UIBarButtonItem) {
         myProgressView.hidden = false
         loadPage()
     }
     
-    func delay(delay: Double, closure: ()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(),
-            closure
-        )
-    }
-    
-    func funcToCallWhenStartLoadingYourWebview() {
+    func startProgressBar() {
         self.myProgressView.progress = 0.0
         self.theBool = false
         self.myTimer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(WebViewController.timerCallback), userInfo: nil, repeats: true)
     }
     
-    func funcToCallCalledWhenUIWebViewFinishesLoading() {
+    func endProgresBar() {
         self.theBool = true
     }
     
