@@ -15,18 +15,33 @@ class LatestPostsTableViewController: UITableViewController {
     
 
     let latestPosts : String = "https://severallevels.io/wp-json/wp/v2/posts/"
-    
-    let tuts: String = "https://severallevels.io/wp-json/wp/v2/posts//?filter[category_name]=tutorials"
+    let inactiveColor : UIColor = UIColor(red: 188/255, green: 228/255, blue: 255/255, alpha: 1)
     
     @IBOutlet var navBarTitle: UINavigationItem!
-    @IBOutlet var controller: UIBarButtonItem!
-    let icbackImg: UIImage = UIImage(named: "ic_background")!
-    let icbackImgClear: UIImage = UIImage(named: "ic_clear_background")!
-
     @IBOutlet var homeButtonIcon: UIBarButtonItem!
-    
     @IBOutlet var sortTutorialsIcon: UIBarButtonItem!
+    @IBOutlet var sortGamesIcon: UIBarButtonItem!
+    @IBOutlet var sortTechIcon: UIBarButtonItem!
+    
+    
+    
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
+    
+    let parametersTutorials : [String:AnyObject] = [
+        "filter[category_name]" : "tutorials",
+        "filter[posts_per_page]" : 100
+    ]
+    
+    let parametersGames : [String:AnyObject] = [
+        "filter[category_name]" : "games",
+        "filter[posts_per_page]" : 100
+    ]
+    
+    let parametersTech : [String:AnyObject] = [
+        "filter[category_name]" : "tech",
+        "filter[posts_per_page]" : 100
+    ]
+    
     var json : JSON = JSON.null
     var preventAnimation = Set<NSIndexPath>()
     
@@ -34,52 +49,40 @@ class LatestPostsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.tableView.backgroundView = UIImageView(image:UIImage(named:"background"))
-        
-        
-        //create a new button
-        //let button: UIButton = UIButtonType(rawValue: UIButtonType.Custom)
-        //set image for button
-        //button.setImage(UIImage(named: "fb.png"), forState: UIControlState.Normal)
-        //add function for button
-        
-//        let backImg: UIImage = UIImage(named: "Home")!
-//        controller.setBackgroundImage(backImg, forState: .Normal, barMetrics: .Default)
-//        let barButton = UIBarButtonItem(image: UIImage(named: "Home"), landscapeImagePhone: nil, style: .Done, target: self, action: #selector(newNews))
-        //self.navigationItem.leftBarButtonItem = barButton
-//        self.toolbarItems?.append(barButton)
-        
-//        controller.target.self
-//        controller.action("sayHello")
-//        
-//        button.addTarget(self, action: "fbButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
-//        //set frame
-//        button.frame = CGRectMake(0, 0, 53, 31)
-//        
-//        let barButton = UIBarButtonItem(customView: button)
-//        //assign button to navigationbar
-//        self.navigationItem.rightBarButtonItem = barButton
-        
-        
-        
-        
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
         refreshControl.addTarget(self, action: #selector(LatestPostsTableViewController.newNews), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
         
-        getPosts(latestPosts)
+        homeButtonIcon.tintColor = UIColor.whiteColor()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
+        getPosts(latestPosts, params: parameters)
+        
     }
     
     func newNews() {
-        getPosts(latestPosts)
+        getPosts(latestPosts, params: parameters)
         self.tableView.reloadData()
         refreshControl?.endRefreshing()
+        navBarTitle.title = "several levels"
+        homeButtonIcon.tintColor = UIColor.whiteColor()
+    }
+    
+    @IBAction func homeButton(sender: AnyObject) {
+        tableView.hidden = true
+        self.tableView.setContentOffset(CGPointZero, animated:false)
+        delay(0.25) {
+            self.preventAnimation.removeAll()
+            self.getPosts(self.latestPosts, params: self.parameters)
+        }
+        delay(0.75){
+            self.tableView.hidden = false
+        }
         navBarTitle.title = "the latest"
+        homeButtonIcon.tintColor = UIColor.whiteColor()
+        sortTutorialsIcon.tintColor = inactiveColor
+        sortGamesIcon.tintColor = inactiveColor
+        sortTechIcon.tintColor = inactiveColor
     }
     
     @IBAction func sortTutorials(sender: UIBarButtonItem) {
@@ -87,21 +90,54 @@ class LatestPostsTableViewController: UITableViewController {
         self.tableView.setContentOffset(CGPointZero, animated:false)
         delay(0.25) {
             self.preventAnimation.removeAll()
-            self.getPosts(self.tuts)
+            self.getPosts(self.latestPosts, params: self.parametersTutorials)
+        }
+        delay(0.75){
             self.tableView.hidden = false
         }
         navBarTitle.title = "tutorials"
         sortTutorialsIcon.tintColor = UIColor.whiteColor()
-        homeButtonIcon.tintColor = UIColor(red: 188/255, green: 228/255, blue: 255/255, alpha: 1)
+        homeButtonIcon.tintColor = inactiveColor
+        sortGamesIcon.tintColor = inactiveColor
+        sortTechIcon.tintColor = inactiveColor
     }
-    @IBAction func homeBUtton(sender: AnyObject) {
-        getPosts(latestPosts)
-        self.tableView.reloadData()
-        refreshControl?.endRefreshing()
-        navBarTitle.title = "the latest"
-        sortTutorialsIcon.tintColor = UIColor(red: 188/255, green: 228/255, blue: 255/255, alpha: 1)
-        homeButtonIcon.tintColor = UIColor.whiteColor()
+    
+    @IBAction func sortGames(sender: AnyObject) {
+        tableView.hidden = true
+        self.tableView.setContentOffset(CGPointZero, animated:false)
+        delay(0.25) {
+            self.preventAnimation.removeAll()
+            self.getPosts(self.latestPosts, params: self.parametersGames)
+        }
+        delay(0.75){
+            self.tableView.hidden = false
+        }
+        navBarTitle.title = "games"
+        sortGamesIcon.tintColor = UIColor.whiteColor()
+        homeButtonIcon.tintColor = inactiveColor
+        sortTutorialsIcon.tintColor = inactiveColor
+        sortTechIcon.tintColor = inactiveColor
+        
     }
+    
+    
+    @IBAction func sortTech(sender: AnyObject) {
+        tableView.hidden = true
+        self.tableView.setContentOffset(CGPointZero, animated:false)
+        delay(0.25) {
+            self.preventAnimation.removeAll()
+            self.getPosts(self.latestPosts, params: self.parametersTech)
+        }
+        delay(0.75){
+            self.tableView.hidden = false
+        }
+        navBarTitle.title = "tech"
+        sortTechIcon.tintColor = UIColor.whiteColor()
+        homeButtonIcon.tintColor = inactiveColor
+        sortTutorialsIcon.tintColor = inactiveColor
+        sortGamesIcon.tintColor = inactiveColor
+    }
+    
     
     func delay(delay: Double, closure: ()->()) {
         dispatch_after(
@@ -114,9 +150,9 @@ class LatestPostsTableViewController: UITableViewController {
         )
     }
     
-    func getPosts(getposts : String) {
+    func getPosts(getposts : String, params: AnyObject) {
         
-          Alamofire.request(.GET, getposts, parameters: parameters).responseJSON { response in
+          Alamofire.request(.GET, getposts, parameters: params as? [String : AnyObject]).responseJSON { response in
                 
                 guard let data = response.result.value else{
                     print("Request failed with error")

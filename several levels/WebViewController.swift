@@ -28,7 +28,10 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         
         navigationController?.hidesBarsOnSwipe = true
         
-        // make sure post url is as string
+        loadPage()
+    }
+    
+    func loadPage() {
         if let postLink = self.viewPost["link"].string {
             funcToCallWhenStartLoadingYourWebview()
             
@@ -50,19 +53,35 @@ class WebViewController: UIViewController, UIWebViewDelegate {
             
             funcToCallCalledWhenUIWebViewFinishesLoading()
             
+            
         }
-        // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func refresh(sender: UIBarButtonItem) {
+        myProgressView.hidden = false
+        loadPage()
+    }
+    
+    func delay(delay: Double, closure: ()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(),
+            closure
+        )
+    }
+    
     func funcToCallWhenStartLoadingYourWebview() {
         self.myProgressView.progress = 0.0
         self.theBool = false
-        self.myTimer = NSTimer.scheduledTimerWithTimeInterval(0.01667, target: self, selector: #selector(WebViewController.timerCallback), userInfo: nil, repeats: true)
+        self.myTimer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(WebViewController.timerCallback), userInfo: nil, repeats: true)
     }
     
     func funcToCallCalledWhenUIWebViewFinishesLoading() {
@@ -79,12 +98,22 @@ class WebViewController: UIViewController, UIWebViewDelegate {
             }
         } else {
             self.myProgressView.progress += 0.05
-            if self.myProgressView.progress >= 0.95 {
-                self.myProgressView.progress = 0.95
+            if self.myProgressView.progress >= 0.75 {
+                self.myProgressView.progress = 0.75
             }
         }
     }
-        
+    
+    func displayShareSheet(shareContent:NSURL) {
+        let activityViewController = UIActivityViewController(activityItems: [shareContent as NSURL], applicationActivities: nil)
+        presentViewController(activityViewController, animated: true, completion: {})
+    }
+    
+    @IBAction func shareButton(sender: AnyObject) {
+        if let shareUrl = NSURL(string: self.viewPost["link"].string!) {
+            displayShareSheet(shareUrl)
+        }
+    }
 
     /*
     // MARK: - Navigation
