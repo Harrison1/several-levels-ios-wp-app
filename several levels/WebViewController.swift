@@ -19,6 +19,8 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     var theBool: Bool = false
     var myTimer: NSTimer!
     
+    var titleShare: String = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,8 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         // set user agent
         NSUserDefaults.standardUserDefaults().registerDefaults(["UserAgent": "several-levels"])
         
+        navigationController?.navigationBarHidden = false
+        navigationController?.toolbarHidden = false
         navigationController?.hidesBarsOnSwipe = true
         
         loadPage()
@@ -47,7 +51,6 @@ class WebViewController: UIViewController, UIWebViewDelegate {
             // set title of navbar to title of wordpress post
             if let title = self.viewPost["title"].string {
                 self.title = title
-                print(title)
             }
             
         }
@@ -102,9 +105,18 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         presentViewController(activityViewController, animated: true, completion: {})
     }
     
-    @IBAction func shareButton(sender: AnyObject) {
+    func displayAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        presentViewController(alertController, animated: true, completion: nil)
+        return
+    }
+    
+    @IBAction func shareButton(sender: UIButton) {
         if let shareUrl = NSURL(string: self.viewPost["link"].string!) {
             displayShareSheet(shareUrl)
+        } else {
+            displayAlert("Oops", message: "something went wrong, you might have to try again")
         }
     }
 

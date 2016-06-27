@@ -23,6 +23,8 @@ class LatestPostsTableViewController: UITableViewController {
     @IBOutlet var sortGamesIcon: UIBarButtonItem!
     @IBOutlet var sortTechIcon: UIBarButtonItem!
     
+    let imagePlaceHolder : UIImage = UIImage(named: "placeholder")!
+    
     
     
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
@@ -248,7 +250,7 @@ class LatestPostsTableViewController: UITableViewController {
         
         if let featureImage = self.json[row]["featured_image_url"].string {
             let image : NSURL? = NSURL(string: featureImage)
-            cell.postImage.sd_setImageWithURL(image)
+            cell.postImage.sd_setImageWithURL(image, placeholderImage: imagePlaceHolder)
         }
         
         return cell
