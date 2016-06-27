@@ -45,78 +45,101 @@ class LatestPostsTableViewController: UITableViewController {
     var json : JSON = JSON.null
     var preventAnimation = Set<NSIndexPath>()
     
+    /// View which contains the loading text and the spinner
+    let loadingView = UIView()
+    
+    /// Spinner shown during load the TableView
+    let spinner = UIActivityIndicatorView()
+    
+    /// Text shown during load the TableView
+    let loadingLabel = UILabel()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
-        refreshControl.addTarget(self, action: #selector(LatestPostsTableViewController.newNews), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(LatestPostsTableViewController.loadData), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
         
-        homeButtonIcon.tintColor = UIColor.whiteColor()
-        
-        getPosts(latestPosts, params: parameters)
+        self.setLoadingScreen()
+                
+        loadData()
         
     }
     
-    func newNews() {
-        getPosts(latestPosts, params: parameters)
+    func loadData() {
+        self.tableView.setContentOffset(CGPointZero, animated:false)
+        self.setLoadingScreen()
+        self.preventAnimation.removeAll()
+        self.getPosts(self.latestPosts, params: self.parameters)
         self.tableView.reloadData()
-        refreshControl?.endRefreshing()
         navBarTitle.title = "several levels"
         homeButtonIcon.tintColor = UIColor.whiteColor()
+        sortTutorialsIcon.tintColor = inactiveColor
+        sortGamesIcon.tintColor = inactiveColor
+        sortTechIcon.tintColor = inactiveColor
+        
+        delay(1) {
+            self.removeLoadingScreen()
+        }
     }
     
     @IBAction func homeButton(sender: AnyObject) {
         tableView.hidden = true
         self.tableView.setContentOffset(CGPointZero, animated:false)
-        delay(0.25) {
-            self.preventAnimation.removeAll()
-            self.getPosts(self.latestPosts, params: self.parameters)
-        }
-        delay(0.75){
-            self.tableView.hidden = false
-        }
-        navBarTitle.title = "the latest"
+        self.setLoadingScreen()
+        self.preventAnimation.removeAll()
+        self.getPosts(self.latestPosts, params: self.parameters)
+        self.tableView.reloadData()
+        navBarTitle.title = "The Latest"
         homeButtonIcon.tintColor = UIColor.whiteColor()
         sortTutorialsIcon.tintColor = inactiveColor
         sortGamesIcon.tintColor = inactiveColor
         sortTechIcon.tintColor = inactiveColor
+        tableView.hidden = false
+        
+        delay(1) {
+            self.removeLoadingScreen()
+        }
     }
     
     @IBAction func sortTutorials(sender: UIBarButtonItem) {
         tableView.hidden = true
         self.tableView.setContentOffset(CGPointZero, animated:false)
-        delay(0.25) {
-            self.preventAnimation.removeAll()
-            self.getPosts(self.latestPosts, params: self.parametersTutorials)
+        self.setLoadingScreen()
+        self.preventAnimation.removeAll()
+        self.getPosts(self.latestPosts, params: self.parametersTutorials)
+        self.tableView.reloadData()
+        self.navBarTitle.title = "Tutorials"
+        self.sortTutorialsIcon.tintColor = UIColor.whiteColor()
+        self.homeButtonIcon.tintColor = self.inactiveColor
+        self.sortGamesIcon.tintColor = self.inactiveColor
+        self.sortTechIcon.tintColor = self.inactiveColor
+        tableView.hidden = false
+        
+        delay(1) {
+            self.removeLoadingScreen()
         }
-        delay(0.75){
-            self.tableView.hidden = false
-        }
-        navBarTitle.title = "tutorials"
-        sortTutorialsIcon.tintColor = UIColor.whiteColor()
-        homeButtonIcon.tintColor = inactiveColor
-        sortGamesIcon.tintColor = inactiveColor
-        sortTechIcon.tintColor = inactiveColor
     }
     
     @IBAction func sortGames(sender: AnyObject) {
         tableView.hidden = true
         self.tableView.setContentOffset(CGPointZero, animated:false)
-        delay(0.25) {
-            self.preventAnimation.removeAll()
-            self.getPosts(self.latestPosts, params: self.parametersGames)
-        }
-        delay(0.75){
-            self.tableView.hidden = false
-        }
-        navBarTitle.title = "games"
+        self.setLoadingScreen()
+        self.preventAnimation.removeAll()
+        self.getPosts(self.latestPosts, params: self.parametersGames)
+        navBarTitle.title = "Games"
         sortGamesIcon.tintColor = UIColor.whiteColor()
         homeButtonIcon.tintColor = inactiveColor
         sortTutorialsIcon.tintColor = inactiveColor
         sortTechIcon.tintColor = inactiveColor
+        self.tableView.hidden = false
+
+        delay(1) {
+            self.removeLoadingScreen()
+        }
         
     }
     
@@ -124,18 +147,20 @@ class LatestPostsTableViewController: UITableViewController {
     @IBAction func sortTech(sender: AnyObject) {
         tableView.hidden = true
         self.tableView.setContentOffset(CGPointZero, animated:false)
-        delay(0.25) {
-            self.preventAnimation.removeAll()
-            self.getPosts(self.latestPosts, params: self.parametersTech)
-        }
-        delay(0.75){
-            self.tableView.hidden = false
-        }
-        navBarTitle.title = "tech"
+        self.setLoadingScreen()
+        self.preventAnimation.removeAll()
+        self.getPosts(self.latestPosts, params: self.parametersTech)
+        self.tableView.hidden = false
+        navBarTitle.title = "Tech"
         sortTechIcon.tintColor = UIColor.whiteColor()
         homeButtonIcon.tintColor = inactiveColor
         sortTutorialsIcon.tintColor = inactiveColor
         sortGamesIcon.tintColor = inactiveColor
+        self.tableView.hidden = false
+
+        delay(1) {
+            self.removeLoadingScreen()
+        }
     }
     
     
@@ -242,6 +267,56 @@ class LatestPostsTableViewController: UITableViewController {
         if let indexPath = self.tableView.indexPathForSelectedRow {
             let selected = self.json[indexPath.row]
             postScene.viewPost = selected
+        }
+        
+    }
+    
+    // Set the activity indicator into the main view
+    private func setLoadingScreen() {
+        
+        self.loadingLabel.hidden = false
+        self.loadingView.hidden = false
+        loadingView.layer.opacity = 1
+        
+        // Sets the view which contains the loading text and the spinner
+        let width: CGFloat = tableView.frame.size.width
+        let height: CGFloat = tableView.frame.size.height
+        let x = (self.tableView.frame.width / 2)
+        let y = (self.tableView.frame.height / 2) - (self.navigationController?.navigationBar.frame.height)!
+        loadingView.frame = CGRectMake(0, 0, width, height)
+        loadingView.backgroundColor = UIColor.blackColor()
+        
+        // Sets loading text
+        self.loadingLabel.textColor = UIColor.whiteColor()
+        self.loadingLabel.textAlignment = NSTextAlignment.Center
+        self.loadingLabel.text = "Loading..."
+        self.loadingLabel.frame = CGRectMake(x-30, y, 140, 30)
+        
+        // Sets spinner
+        self.spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.White
+        self.spinner.frame = CGRectMake(x-30, y, 30, 30)
+        self.spinner.startAnimating()
+        
+        // Adds text and spinner to the view
+        loadingView.addSubview(self.spinner)
+        loadingView.addSubview(self.loadingLabel)
+        
+        self.tableView.addSubview(loadingView)
+        
+    }
+    
+    // Remove the activity indicator from the main view
+    private func removeLoadingScreen() {
+        
+        UIView.animateWithDuration(1) {
+            self.loadingView.layer.opacity = 0
+        }
+        
+        // Hides and stops the text and the spinner
+        delay(1) {
+            self.spinner.stopAnimating()
+            self.loadingLabel.hidden = true
+            self.loadingView.hidden = true
         }
         
     }

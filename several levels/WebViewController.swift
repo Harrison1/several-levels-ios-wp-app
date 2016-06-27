@@ -33,8 +33,6 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     
     func loadPage() {
         if let postLink = self.viewPost["link"].string {
-//            funcToCallWhenStartLoadingYourWebview()
-            
             // convert url stirng to NSURL object
             let requestURL = NSURL(string: postLink)
             
@@ -49,10 +47,8 @@ class WebViewController: UIViewController, UIWebViewDelegate {
             // set title of navbar to title of wordpress post
             if let title = self.viewPost["title"].string {
                 self.title = title
+                print(title)
             }
-            
-//            funcToCallCalledWhenUIWebViewFinishesLoading()
-            
             
         }
     }
