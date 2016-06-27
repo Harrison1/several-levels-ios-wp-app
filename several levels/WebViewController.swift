@@ -28,7 +28,6 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         // set user agent
         NSUserDefaults.standardUserDefaults().registerDefaults(["UserAgent": "several-levels"])
         
-        navigationController?.navigationBarHidden = false
         navigationController?.toolbarHidden = false
         navigationController?.hidesBarsOnSwipe = true
         
@@ -49,7 +48,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
             webView.loadRequest(request)
             
             // set title of navbar to title of wordpress post
-            if let title = self.viewPost["title"].string {
+            if let title = self.viewPost["title"]["rendered"].string {
                 self.title = title
             }
             

@@ -26,7 +26,6 @@ class LatestPostsTableViewController: UITableViewController {
     let imagePlaceHolder : UIImage = UIImage(named: "placeholder")!
     
     
-    
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
     
     let parametersTutorials : [String:AnyObject] = [
@@ -56,6 +55,7 @@ class LatestPostsTableViewController: UITableViewController {
     /// Text shown during load the TableView
     let loadingLabel = UILabel()
     
+    var switcher: UISegmentedControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -317,6 +317,60 @@ class LatestPostsTableViewController: UITableViewController {
             self.loadingView.hidden = true
         }
         
+    }
+    
+    /**
+     For configuring the NavigationBar to show/hide when user swipes
+     - returns: void
+     */
+    func configureNavigationBarAsHideable() {
+        
+        if let navigationController = self.navigationController {
+            
+            // respond to swipe and hide/show
+            navigationController.hidesBarsOnSwipe = true
+            
+            // get the pan gesture used to trigger hiding/showing the NavigationBar
+            let panGestureRecognizer = navigationController.barHideOnSwipeGestureRecognizer
+            
+            // when the user pans, call action method to fade out title view
+            panGestureRecognizer.addTarget(self, action:#selector(LatestPostsTableViewController.fadeOutTitleView(_:)))
+        }
+    }
+    
+    /**
+     For fading out the title view
+     - parameter sender: The UIPanGestureRecognizer when user swipes (and hides/shows NavigationBar))
+     - returns: void
+     */
+    func fadeOutTitleView(sender: UIPanGestureRecognizer) {
+        
+        if let titleView = self.navigationItem.titleView {
+            
+            // fade out title view when swiping up
+            let translation = sender.translationInView(self.view)
+            
+            if(translation.y < 0) {
+                
+                let alphaValue = 1 - abs(translation.y / titleView.frame.height)
+                
+                titleView.alpha = alphaValue
+            }
+            
+            // clear transparency if the Navigation Bar is not hidden after swiping
+            if let navigationController = self.navigationController {
+                
+                let navigationBar = navigationController.navigationBar
+                
+                if navigationBar.frame.origin.y > 0 {
+                    
+                    if let titleView = self.navigationItem.titleView {
+                        
+                        titleView.alpha = 1
+                    }
+                }
+            }
+        }
     }
 
 }
