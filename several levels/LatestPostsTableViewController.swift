@@ -32,7 +32,7 @@ class LatestPostsTableViewController: UITableViewController {
     let loadingView = UIView()
     let spinner = UIActivityIndicatorView()
     let loadingLabel = UILabel()
-        
+    
     let customControl = UISegmentedControl(items: [UIImage(named: "home")!, UIImage(named: "tutorials")!, UIImage(named: "games")!, UIImage(named: "tech")!])
     
     override func loadView() {

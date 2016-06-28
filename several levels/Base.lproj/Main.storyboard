@@ -13,7 +13,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="276" sectionHeaderHeight="28" sectionFooterHeight="28" id="7ks-gR-izB">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.62076139450073242" green="0.80928689241409302" blue="0.85874438285827637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell alpha="0.0" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="280" id="dQa-cU-fUs" customClass="LatestPostsTableViewCell" customModule="several_levels" customModuleProvider="target">
@@ -78,14 +78,17 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.31777045630837364" green="0.79001548685335976" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.27104339678682826" green="0.69261906507948245" blue="0.88717948717948714" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="eH1-wP-mf7" firstAttribute="leading" secondItem="KOz-qD-6C2" secondAttribute="leading" constant="8" id="5cf-Ym-OES"/>
                                                         <constraint firstAttribute="width" constant="343" id="83V-hW-Xm9"/>
+                                                        <constraint firstItem="ov3-G1-2Dh" firstAttribute="top" secondItem="KOz-qD-6C2" secondAttribute="top" constant="156" id="AET-oc-EEQ"/>
                                                         <constraint firstAttribute="bottom" secondItem="ov3-G1-2Dh" secondAttribute="bottom" constant="37" id="CYc-vr-zrd"/>
+                                                        <constraint firstItem="ov3-G1-2Dh" firstAttribute="leading" secondItem="KOz-qD-6C2" secondAttribute="leading" constant="8" id="DI6-hb-Jul"/>
                                                         <constraint firstAttribute="height" constant="247" id="H8W-ys-Bpx"/>
                                                         <constraint firstAttribute="trailing" secondItem="kjy-Vy-VMC" secondAttribute="trailing" id="MXA-RT-Uvd"/>
                                                         <constraint firstItem="ov3-G1-2Dh" firstAttribute="leading" secondItem="eH1-wP-mf7" secondAttribute="leading" id="NrM-J2-OfT"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ov3-G1-2Dh" secondAttribute="trailing" constant="8" id="O90-Or-qGj"/>
                                                         <constraint firstAttribute="bottom" secondItem="eH1-wP-mf7" secondAttribute="bottom" constant="99" id="RMB-Uj-mKX"/>
                                                         <constraint firstItem="ov3-G1-2Dh" firstAttribute="top" secondItem="eH1-wP-mf7" secondAttribute="bottom" constant="8" symbolic="YES" id="Rue-mL-3V2"/>
                                                         <constraint firstItem="ov3-G1-2Dh" firstAttribute="trailing" secondItem="eH1-wP-mf7" secondAttribute="trailing" id="ZUW-Bc-jSP"/>
@@ -105,14 +108,14 @@
                                                         </mask>
                                                     </variation>
                                                 </view>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zTf-o7-c7T">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zTf-o7-c7T">
                                                     <rect key="frame" x="0.0" y="223" width="343" height="24"/>
                                                     <color key="backgroundColor" red="0.50634463939999996" green="0.73037091160000001" blue="0.89489182690000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9P-tu-1h6">
                                                     <rect key="frame" x="12" y="223" width="319" height="24"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -120,12 +123,16 @@
                                             <constraints>
                                                 <constraint firstItem="KOz-qD-6C2" firstAttribute="leading" secondItem="xTg-kR-7IW" secondAttribute="leading" id="54X-67-i6u"/>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="343" id="9Oi-f2-kZu"/>
+                                                <constraint firstItem="zTf-o7-c7T" firstAttribute="leading" secondItem="xTg-kR-7IW" secondAttribute="leading" id="9Ve-MF-LLX"/>
                                                 <constraint firstAttribute="trailing" secondItem="KOz-qD-6C2" secondAttribute="trailing" id="9kj-4J-MdV"/>
                                                 <constraint firstItem="KOz-qD-6C2" firstAttribute="centerY" secondItem="xTg-kR-7IW" secondAttribute="centerY" id="IEE-u9-Svn"/>
+                                                <constraint firstItem="zTf-o7-c7T" firstAttribute="top" secondItem="xTg-kR-7IW" secondAttribute="top" constant="223" id="QRy-eL-dYw"/>
                                                 <constraint firstItem="KOz-qD-6C2" firstAttribute="centerX" secondItem="xTg-kR-7IW" secondAttribute="centerX" id="dHU-Gf-kzK"/>
                                                 <constraint firstAttribute="height" constant="247" id="dhA-en-cF5"/>
                                                 <constraint firstAttribute="width" constant="343" id="dwl-lT-pyQ"/>
                                                 <constraint firstAttribute="bottom" secondItem="KOz-qD-6C2" secondAttribute="bottom" id="gNB-mn-6i7"/>
+                                                <constraint firstAttribute="bottom" secondItem="zTf-o7-c7T" secondAttribute="bottom" id="gt9-Zo-kXv"/>
+                                                <constraint firstAttribute="trailing" secondItem="zTf-o7-c7T" secondAttribute="trailing" id="hkO-Mh-BiZ"/>
                                                 <constraint firstItem="KOz-qD-6C2" firstAttribute="top" secondItem="xTg-kR-7IW" secondAttribute="top" id="w16-UV-ZVw"/>
                                             </constraints>
                                             <variation key="default">
