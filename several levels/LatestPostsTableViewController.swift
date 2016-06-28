@@ -45,6 +45,8 @@ class LatestPostsTableViewController: UITableViewController {
         "filter[posts_per_page]" : 100
     ]
     
+    @IBOutlet var segmentedControl: CustomSegmentedControl!
+    
     var json : JSON = JSON.null
     var preventAnimation = Set<NSIndexPath>()
     
@@ -56,10 +58,9 @@ class LatestPostsTableViewController: UITableViewController {
     
     /// Text shown during load the TableView
     let loadingLabel = UILabel()
-    
-    //let items : [UIImage] = [UIImage(named: "home")!, UIImage(named: "home")!, UIImage(named: "home")!, UIImage(named: "home")!]
+        
+    let items : [UIImage] = [UIImage(named: "home")!, UIImage(named: "home")!, UIImage(named: "home")!, UIImage(named: "home")!]
     let customSC = UISegmentedControl(items: [UIImage(named: "home")!, UIImage(named: "tutorials")!, UIImage(named: "games")!, UIImage(named: "tech")!])
-    
     
     override func loadView() {
         super.loadView()
@@ -78,7 +79,26 @@ class LatestPostsTableViewController: UITableViewController {
         
         customSC.addTarget(self, action: #selector(LatestPostsTableViewController.filterSelect), forControlEvents: .ValueChanged)
         
-        let segmentedC = UIBarButtonItem(customView: customSC)
+        customSC.setDividerImage(self.imageWithColor(UIColor.clearColor()), forLeftSegmentState: UIControlState.Normal, rightSegmentState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
+        
+        customSC.setBackgroundImage(self.imageWithColor(UIColor.clearColor()), forState:UIControlState.Normal, barMetrics:UIBarMetrics.Default)
+        
+        customSC.setBackgroundImage(self.imageWithColor(UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha:1.0)), forState:UIControlState.Selected, barMetrics:UIBarMetrics.Default);
+        
+        
+        for  borderview in customSC.subviews {
+            let upperBorder: CALayer = CALayer()
+            upperBorder.backgroundColor = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).CGColor
+            upperBorder.frame = CGRectMake(0, borderview.frame.size.height-1, borderview.frame.size.width, 1.0); borderview.layer .addSublayer(upperBorder);
+            }
+        
+        segmentedControl.items = ["WEEKLY", "MONTHLY", "YEARLY", "TWO"]
+        segmentedControl.font = UIFont(name: "Avenir-Black", size: 12)
+        segmentedControl.borderColor = UIColor(white: 1.0, alpha: 0.3)
+        segmentedControl.selectedIndex = 1
+        segmentedControl.addTarget(self, action: #selector(LatestPostsTableViewController.filterSelect), forControlEvents: .ValueChanged)
+        
+        let segmentedC = UIBarButtonItem(customView: segmentedControl)
         
         let toolbarArray = [flexibleSpace, segmentedC, flexibleSpace]
         
@@ -100,6 +120,19 @@ class LatestPostsTableViewController: UITableViewController {
         loadData()
         
     }
+    
+        func imageWithColor(color: UIColor) -> UIImage {
+    
+            let rect = CGRectMake(0.0, 0.0, 1.0, customSC.frame.size.height)
+            UIGraphicsBeginImageContext(rect.size)
+            let context = UIGraphicsGetCurrentContext()
+            CGContextSetFillColorWithColor(context, color.CGColor);
+            CGContextFillRect(context, rect);
+            let image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            return image
+            
+        }
     
     func loadData() {
         self.tableView.setContentOffset(CGPointZero, animated:false)

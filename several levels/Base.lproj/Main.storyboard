@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--several levels-->
+        <!--Latest Posts Table View Controller-->
         <scene sceneID="cYA-ew-dfT">
             <objects>
                 <tableViewController id="srl-zW-oFF" customClass="LatestPostsTableViewController" customModule="several_levels" customModuleProvider="target" sceneMemberID="viewController">
@@ -15,9 +15,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="7Ds-7k-wbq" customClass="CustomSegmentedControl" customModule="several_levels" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
                             <tableViewCell alpha="0.0" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="280" id="dQa-cU-fUs" customClass="LatestPostsTableViewCell" customModule="several_levels" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="280"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="280"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dQa-cU-fUs" id="xNM-bu-xNW">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
@@ -163,12 +168,14 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="several levels" id="8Zw-ih-PPD">
+                    <navigationItem key="navigationItem" id="8Zw-ih-PPD">
+                        <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title="Back" id="zXO-yW-qxL"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="navBarTitle" destination="8Zw-ih-PPD" id="pHK-yY-GvM"/>
+                        <outlet property="segmentedControl" destination="7Ds-7k-wbq" id="4fD-qQ-MEB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Vm-x9-wmx" userLabel="First Responder" sceneMemberID="firstResponder"/>

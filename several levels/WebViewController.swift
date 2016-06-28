@@ -98,7 +98,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
             }
         }
     }
-    
+        
     func displayShareSheet(shareContent:NSURL) {
         let activityViewController = UIActivityViewController(activityItems: [shareContent as NSURL], applicationActivities: nil)
         presentViewController(activityViewController, animated: true, completion: {})
