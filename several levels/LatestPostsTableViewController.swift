@@ -123,6 +123,7 @@ class LatestPostsTableViewController: UITableViewController {
         self.getPosts(self.latestPosts, params: self.parameters)
         self.tableView.reloadData()
         navBarTitle.title = "The Latest"
+        self.refreshControl?.endRefreshing()
         tableView.hidden = false
         
         delay(1) {
@@ -138,7 +139,9 @@ class LatestPostsTableViewController: UITableViewController {
         self.getPosts(self.latestPosts, params: self.parametersTutorials)
         self.tableView.reloadData()
         self.navBarTitle.title = "Tutorials"
+        self.refreshControl?.endRefreshing()
         tableView.hidden = false
+        
         delay(1) {
             self.removeLoadingScreen()
         }
@@ -151,6 +154,7 @@ class LatestPostsTableViewController: UITableViewController {
         self.preventAnimation.removeAll()
         self.getPosts(self.latestPosts, params: self.parametersGames)
         navBarTitle.title = "Games"
+        self.refreshControl?.endRefreshing()
         self.tableView.hidden = false
 
         delay(1) {
@@ -168,6 +172,7 @@ class LatestPostsTableViewController: UITableViewController {
         self.getPosts(self.latestPosts, params: self.parametersTech)
         self.tableView.hidden = false
         navBarTitle.title = "Tech"
+        self.refreshControl?.endRefreshing()
         self.tableView.hidden = false
 
         delay(1) {
