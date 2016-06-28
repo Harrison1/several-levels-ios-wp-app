@@ -18,14 +18,14 @@ class LatestPostsTableViewController: UITableViewController {
     let inactiveColor : UIColor = UIColor(red: 188/255, green: 228/255, blue: 255/255, alpha: 1)
     
     @IBOutlet var navBarTitle: UINavigationItem!
-    @IBOutlet var homeButtonIcon: UIBarButtonItem!
-    @IBOutlet var sortTutorialsIcon: UIBarButtonItem!
-    @IBOutlet var sortGamesIcon: UIBarButtonItem!
-    @IBOutlet var sortTechIcon: UIBarButtonItem!
     
     let imagePlaceHolder : UIImage = UIImage(named: "placeholder")!
     
-    let homy: UIImage = UIImage(named: "home")!
+    let home: UIImage = UIImage(named: "home")!
+    let tutorials: UIImage = UIImage(named: "tutorials")!
+    let games: UIImage = UIImage(named: "games")!
+    let tech: UIImage = UIImage(named: "tech")!
+
     
     
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
@@ -57,57 +57,47 @@ class LatestPostsTableViewController: UITableViewController {
     /// Text shown during load the TableView
     let loadingLabel = UILabel()
     
-    var switcher: UISegmentedControl!
+    //let items : [UIImage] = [UIImage(named: "home")!, UIImage(named: "home")!, UIImage(named: "home")!, UIImage(named: "home")!]
+    let customSC = UISegmentedControl(items: [UIImage(named: "home")!, UIImage(named: "tutorials")!, UIImage(named: "games")!, UIImage(named: "tech")!])
+    
+    
+    override func loadView() {
+        super.loadView()
+        
+        let flexibleSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
-        refreshControl.addTarget(self, action: #selector(LatestPostsTableViewController.loadData), forControlEvents: UIControlEvents.ValueChanged)
-        self.refreshControl = refreshControl
-        
-//        self.setLoadingScreen()
-        
-        loadData()
-        
-        
-        
-        //        self.tableView.backgroundView = UIImageView(image:UIImage(named:"background"))
-        
-        
-        //create a new button
-        //let button: UIButton = UIButtonType(rawValue: UIButtonType.Custom)
-        //set image for button
-        //button.setImage(UIImage(named: "fb.png"), forState: UIControlState.Normal)
-        //add function for button
-        
-        //        let backImg: UIImage = UIImage(named: "Home")!
-        //        controller.setBackgroundImage(backImg, forState: .Normal, barMetrics: .Default)
-        let barButton = UIBarButtonItem(image: UIImage(named: "home"), landscapeImagePhone: nil, style: .Done, target: self, action: #selector(loadData))
-        //self.navigationItem.leftBarButtonItem = barButton
-        
-        let items = [homy, "Green", "Blue"]
-        let customSC = UISegmentedControl(items: items)
         customSC.selectedSegmentIndex = 0
         
         let frame = UIScreen.mainScreen().bounds
         customSC.frame = CGRectMake(0, 0, frame.width - 20, 34)
         
-        let butt = UIBarButtonItem(customView: customSC)
+        // Style the Segmented Control
+        //customSC.layer.cornerRadius = 5.0  // Don't let background bleed
+        //customSC.backgroundColor = UIColor.blackColor()
+        customSC.tintColor = UIColor.whiteColor()
         
-        self.toolbarItems?.append(butt)
+        customSC.addTarget(self, action: #selector(LatestPostsTableViewController.filterSelect), forControlEvents: .ValueChanged)
         
-        //        controller.target.self
-        //        controller.action("sayHello")
-        //
-        //        button.addTarget(self, action: "fbButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
-        //        //set frame
-        //        button.frame = CGRectMake(0, 0, 53, 31)
-        //
-        //        let barButton = UIBarButtonItem(customView: button)
-        //        //assign button to navigationbar
-        //        self.navigationItem.rightBarButtonItem = barButton
+        let segmentedC = UIBarButtonItem(customView: customSC)
+        
+        let toolbarArray = [flexibleSpace, segmentedC, flexibleSpace]
+        
+        self.setToolbarItems(toolbarArray, animated: true)
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor(red: 39/255, green: 207/255, blue: 230/255, alpha: 1)
+        refreshControl.addTarget(self, action: #selector(LatestPostsTableViewController.filterSelect), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl = refreshControl
+        
+        
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+//        self.setLoadingScreen()
+        
+        loadData()
         
     }
     
@@ -117,14 +107,25 @@ class LatestPostsTableViewController: UITableViewController {
         self.getPosts(self.latestPosts, params: self.parameters)
         self.tableView.reloadData()
         navBarTitle.title = "several levels"
-        homeButtonIcon.tintColor = UIColor.whiteColor()
-        sortTutorialsIcon.tintColor = inactiveColor
-        sortGamesIcon.tintColor = inactiveColor
-        sortTechIcon.tintColor = inactiveColor
         self.refreshControl?.endRefreshing()
     }
     
-    @IBAction func homeButton(sender: AnyObject) {
+    func filterSelect() {
+        switch customSC.selectedSegmentIndex {
+            case 0:
+                filterAll()
+            case 1:
+                filterTutorials()
+            case 2:
+                filterGames()
+            case 3:
+                filterTech()
+            default:
+                filterAll()
+        }
+    }
+    
+    func filterAll() {
         tableView.hidden = true
         self.tableView.setContentOffset(CGPointZero, animated:false)
         self.setLoadingScreen()
@@ -132,18 +133,14 @@ class LatestPostsTableViewController: UITableViewController {
         self.getPosts(self.latestPosts, params: self.parameters)
         self.tableView.reloadData()
         navBarTitle.title = "The Latest"
-        homeButtonIcon.tintColor = UIColor.whiteColor()
-        sortTutorialsIcon.tintColor = inactiveColor
-        sortGamesIcon.tintColor = inactiveColor
-        sortTechIcon.tintColor = inactiveColor
         tableView.hidden = false
         
         delay(1) {
             self.removeLoadingScreen()
         }
     }
-    
-    @IBAction func sortTutorials(sender: UIBarButtonItem) {
+
+    func filterTutorials() {
         tableView.hidden = true
         self.tableView.setContentOffset(CGPointZero, animated:false)
         self.setLoadingScreen()
@@ -151,28 +148,19 @@ class LatestPostsTableViewController: UITableViewController {
         self.getPosts(self.latestPosts, params: self.parametersTutorials)
         self.tableView.reloadData()
         self.navBarTitle.title = "Tutorials"
-        self.sortTutorialsIcon.tintColor = UIColor.whiteColor()
-        self.homeButtonIcon.tintColor = self.inactiveColor
-        self.sortGamesIcon.tintColor = self.inactiveColor
-        self.sortTechIcon.tintColor = self.inactiveColor
         tableView.hidden = false
-        
         delay(1) {
             self.removeLoadingScreen()
         }
     }
     
-    @IBAction func sortGames(sender: AnyObject) {
+    func filterGames() {
         tableView.hidden = true
         self.tableView.setContentOffset(CGPointZero, animated:false)
         self.setLoadingScreen()
         self.preventAnimation.removeAll()
         self.getPosts(self.latestPosts, params: self.parametersGames)
         navBarTitle.title = "Games"
-        sortGamesIcon.tintColor = UIColor.whiteColor()
-        homeButtonIcon.tintColor = inactiveColor
-        sortTutorialsIcon.tintColor = inactiveColor
-        sortTechIcon.tintColor = inactiveColor
         self.tableView.hidden = false
 
         delay(1) {
@@ -182,7 +170,7 @@ class LatestPostsTableViewController: UITableViewController {
     }
     
     
-    @IBAction func sortTech(sender: AnyObject) {
+    func filterTech() {
         tableView.hidden = true
         self.tableView.setContentOffset(CGPointZero, animated:false)
         self.setLoadingScreen()
@@ -190,10 +178,6 @@ class LatestPostsTableViewController: UITableViewController {
         self.getPosts(self.latestPosts, params: self.parametersTech)
         self.tableView.hidden = false
         navBarTitle.title = "Tech"
-        sortTechIcon.tintColor = UIColor.whiteColor()
-        homeButtonIcon.tintColor = inactiveColor
-        sortTutorialsIcon.tintColor = inactiveColor
-        sortGamesIcon.tintColor = inactiveColor
         self.tableView.hidden = false
 
         delay(1) {
@@ -359,58 +343,58 @@ class LatestPostsTableViewController: UITableViewController {
         
     }
     
-    /**
-     For configuring the NavigationBar to show/hide when user swipes
-     - returns: void
-     */
-    func configureNavigationBarAsHideable() {
-        
-        if let navigationController = self.navigationController {
-            
-            // respond to swipe and hide/show
-            navigationController.hidesBarsOnSwipe = true
-            
-            // get the pan gesture used to trigger hiding/showing the NavigationBar
-            let panGestureRecognizer = navigationController.barHideOnSwipeGestureRecognizer
-            
-            // when the user pans, call action method to fade out title view
-            panGestureRecognizer.addTarget(self, action:#selector(LatestPostsTableViewController.fadeOutTitleView(_:)))
-        }
-    }
-    
-    /**
-     For fading out the title view
-     - parameter sender: The UIPanGestureRecognizer when user swipes (and hides/shows NavigationBar))
-     - returns: void
-     */
-    func fadeOutTitleView(sender: UIPanGestureRecognizer) {
-        
-        if let titleView = self.navigationItem.titleView {
-            
-            // fade out title view when swiping up
-            let translation = sender.translationInView(self.view)
-            
-            if(translation.y < 0) {
-                
-                let alphaValue = 1 - abs(translation.y / titleView.frame.height)
-                
-                titleView.alpha = alphaValue
-            }
-            
-            // clear transparency if the Navigation Bar is not hidden after swiping
-            if let navigationController = self.navigationController {
-                
-                let navigationBar = navigationController.navigationBar
-                
-                if navigationBar.frame.origin.y > 0 {
-                    
-                    if let titleView = self.navigationItem.titleView {
-                        
-                        titleView.alpha = 1
-                    }
-                }
-            }
-        }
-    }
+//    /**
+//     For configuring the NavigationBar to show/hide when user swipes
+//     - returns: void
+//     */
+//    func configureNavigationBarAsHideable() {
+//        
+//        if let navigationController = self.navigationController {
+//            
+//            // respond to swipe and hide/show
+//            navigationController.hidesBarsOnSwipe = true
+//            
+//            // get the pan gesture used to trigger hiding/showing the NavigationBar
+//            let panGestureRecognizer = navigationController.barHideOnSwipeGestureRecognizer
+//            
+//            // when the user pans, call action method to fade out title view
+//            panGestureRecognizer.addTarget(self, action:#selector(LatestPostsTableViewController.fadeOutTitleView(_:)))
+//        }
+//    }
+//    
+//    /**
+//     For fading out the title view
+//     - parameter sender: The UIPanGestureRecognizer when user swipes (and hides/shows NavigationBar))
+//     - returns: void
+//     */
+//    func fadeOutTitleView(sender: UIPanGestureRecognizer) {
+//        
+//        if let titleView = self.navigationItem.titleView {
+//            
+//            // fade out title view when swiping up
+//            let translation = sender.translationInView(self.view)
+//            
+//            if(translation.y < 0) {
+//                
+//                let alphaValue = 1 - abs(translation.y / titleView.frame.height)
+//                
+//                titleView.alpha = alphaValue
+//            }
+//            
+//            // clear transparency if the Navigation Bar is not hidden after swiping
+//            if let navigationController = self.navigationController {
+//                
+//                let navigationBar = navigationController.navigationBar
+//                
+//                if navigationBar.frame.origin.y > 0 {
+//                    
+//                    if let titleView = self.navigationItem.titleView {
+//                        
+//                        titleView.alpha = 1
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 }
