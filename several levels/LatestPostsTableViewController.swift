@@ -14,93 +14,53 @@ import SDWebImage
 class LatestPostsTableViewController: UITableViewController {
     
 
-    let latestPosts : String = "https://severallevels.io/wp-json/wp/v2/posts/"
-    let inactiveColor : UIColor = UIColor(red: 188/255, green: 228/255, blue: 255/255, alpha: 1)
-    
     @IBOutlet var navBarTitle: UINavigationItem!
     
-    let imagePlaceHolder : UIImage = UIImage(named: "placeholder")!
-    
-    let home: UIImage = UIImage(named: "home")!
-    let tutorials: UIImage = UIImage(named: "tutorials")!
-    let games: UIImage = UIImage(named: "games")!
-    let tech: UIImage = UIImage(named: "tech")!
 
-    
-    
+    let latestPosts : String = "https://severallevels.io/wp-json/wp/v2/posts/"
     let parameters: [String:AnyObject] = ["filter[posts_per_page]" : 100]
+    let parametersTutorials : [String:AnyObject] = ["filter[category_name]" : "tutorials","filter[posts_per_page]" : 100]
+    let parametersGames : [String:AnyObject] = ["filter[category_name]" : "games", "filter[posts_per_page]" : 100]
+    let parametersTech : [String:AnyObject] = ["filter[category_name]" : "tech", "filter[posts_per_page]" : 100]
     
-    let parametersTutorials : [String:AnyObject] = [
-        "filter[category_name]" : "tutorials",
-        "filter[posts_per_page]" : 100
-    ]
-    
-    let parametersGames : [String:AnyObject] = [
-        "filter[category_name]" : "games",
-        "filter[posts_per_page]" : 100
-    ]
-    
-    let parametersTech : [String:AnyObject] = [
-        "filter[category_name]" : "tech",
-        "filter[posts_per_page]" : 100
-    ]
-    
-    @IBOutlet var segmentedControl: CustomSegmentedControl!
-    
+    let imagePlaceHolder : UIImage = UIImage(named: "placeholder")!
+
     var json : JSON = JSON.null
     var preventAnimation = Set<NSIndexPath>()
     
-    /// View which contains the loading text and the spinner
+    // loading view
     let loadingView = UIView()
-    
-    /// Spinner shown during load the TableView
     let spinner = UIActivityIndicatorView()
-    
-    /// Text shown during load the TableView
     let loadingLabel = UILabel()
         
-    let items : [UIImage] = [UIImage(named: "home")!, UIImage(named: "home")!, UIImage(named: "home")!, UIImage(named: "home")!]
-    let customSC = UISegmentedControl(items: [UIImage(named: "home")!, UIImage(named: "tutorials")!, UIImage(named: "games")!, UIImage(named: "tech")!])
+    let customControl = UISegmentedControl(items: [UIImage(named: "home")!, UIImage(named: "tutorials")!, UIImage(named: "games")!, UIImage(named: "tech")!])
     
     override func loadView() {
         super.loadView()
         
         let flexibleSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
 
-        customSC.selectedSegmentIndex = 0
+        customControl.selectedSegmentIndex = 0
         
         let frame = UIScreen.mainScreen().bounds
-        customSC.frame = CGRectMake(0, 0, frame.width - 20, 34)
+        customControl.frame = CGRectMake(0, 0, frame.width - 20, 34)
         
         // Style the Segmented Control
         //customSC.layer.cornerRadius = 5.0  // Don't let background bleed
         //customSC.backgroundColor = UIColor.blackColor()
-        customSC.tintColor = UIColor.whiteColor()
+        customControl.tintColor = UIColor.whiteColor()
         
-        customSC.addTarget(self, action: #selector(LatestPostsTableViewController.filterSelect), forControlEvents: .ValueChanged)
+        customControl.addTarget(self, action: #selector(LatestPostsTableViewController.filterSelect), forControlEvents: .ValueChanged)
         
-        customSC.setDividerImage(self.imageWithColor(UIColor.clearColor()), forLeftSegmentState: UIControlState.Normal, rightSegmentState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
+        customControl.setDividerImage(self.imageWithColor(UIColor.clearColor()), forLeftSegmentState: UIControlState.Normal, rightSegmentState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
         
-        customSC.setBackgroundImage(self.imageWithColor(UIColor.clearColor()), forState:UIControlState.Normal, barMetrics:UIBarMetrics.Default)
+        customControl.setBackgroundImage(self.imageWithColor(UIColor.clearColor()), forState:UIControlState.Normal, barMetrics:UIBarMetrics.Default)
         
-        customSC.setBackgroundImage(self.imageWithColor(UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha:1.0)), forState:UIControlState.Selected, barMetrics:UIBarMetrics.Default);
+        customControl.setBackgroundImage(self.imageWithColor(UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha:1.0)), forState:UIControlState.Selected, barMetrics:UIBarMetrics.Default);
         
+        let segmentedControl = UIBarButtonItem(customView: customControl)
         
-        for  borderview in customSC.subviews {
-            let upperBorder: CALayer = CALayer()
-            upperBorder.backgroundColor = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).CGColor
-            upperBorder.frame = CGRectMake(0, borderview.frame.size.height-1, borderview.frame.size.width, 1.0); borderview.layer .addSublayer(upperBorder);
-            }
-        
-        segmentedControl.items = [UIImage(named: "home")!, UIImage(named: "tutorials")!, UIImage(named: "games")!, UIImage(named: "tech")!]
-    //    segmentedControl.font = UIFont(name: "Avenir-Black", size: 12)
-        segmentedControl.borderColor = UIColor(white: 1.0, alpha: 0.3)
-        segmentedControl.selectedIndex = 0
-        segmentedControl.addTarget(self, action: #selector(LatestPostsTableViewController.filterSelect), forControlEvents: .ValueChanged)
-        
-        let segmentedC = UIBarButtonItem(customView: segmentedControl)
-        
-        let toolbarArray = [flexibleSpace, segmentedC, flexibleSpace]
+        let toolbarArray = [flexibleSpace, segmentedControl, flexibleSpace]
         
         self.setToolbarItems(toolbarArray, animated: true)
         
@@ -115,24 +75,21 @@ class LatestPostsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.setLoadingScreen()
-        
-        loadData()
+        filterSelect()
         
     }
     
-        func imageWithColor(color: UIColor) -> UIImage {
+    func imageWithColor(color: UIColor) -> UIImage {
     
-            let rect = CGRectMake(0.0, 0.0, 1.0, customSC.frame.size.height)
-            UIGraphicsBeginImageContext(rect.size)
-            let context = UIGraphicsGetCurrentContext()
-            CGContextSetFillColorWithColor(context, color.CGColor);
-            CGContextFillRect(context, rect);
-            let image = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            return image
-            
-        }
+        let rect = CGRectMake(0.0, 0.0, 1.0, customControl.frame.size.height)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        CGContextSetFillColorWithColor(context, color.CGColor)
+        CGContextFillRect(context, rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
     
     func loadData() {
         self.tableView.setContentOffset(CGPointZero, animated:false)
@@ -144,7 +101,7 @@ class LatestPostsTableViewController: UITableViewController {
     }
     
     func filterSelect() {
-        switch customSC.selectedSegmentIndex {
+        switch customControl.selectedSegmentIndex {
             case 0:
                 filterAll()
             case 1:
@@ -283,6 +240,11 @@ class LatestPostsTableViewController: UITableViewController {
         cell.mainView.layer.cornerRadius = 10
         cell.mainView.layer.masksToBounds = true
         
+        if let featureImage = self.json[row]["featured_image_url"].string {
+            let image : NSURL? = NSURL(string: featureImage)
+            cell.postImage.sd_setImageWithURL(image, placeholderImage: imagePlaceHolder)
+        }
+        
         //Make sure post title is a string
         if let title = self.json[row]["title"]["rendered"].string {
             cell.postTitle!.text = title
@@ -302,12 +264,11 @@ class LatestPostsTableViewController: UITableViewController {
             
             let dateStringConverted = "\(dateFormatter.stringFromDate(dateObj!))"
             
-            cell.postDate!.text = dateStringConverted
+            cell.postDate!.text = "posted on \(dateStringConverted)"
         }
         
-        if let featureImage = self.json[row]["featured_image_url"].string {
-            let image : NSURL? = NSURL(string: featureImage)
-            cell.postImage.sd_setImageWithURL(image, placeholderImage: imagePlaceHolder)
+        if let content = self.json[row]["content"]["rendered"].string {
+            cell.postPreview.text = content
         }
         
         return cell
@@ -375,59 +336,4 @@ class LatestPostsTableViewController: UITableViewController {
         }
         
     }
-    
-//    /**
-//     For configuring the NavigationBar to show/hide when user swipes
-//     - returns: void
-//     */
-//    func configureNavigationBarAsHideable() {
-//        
-//        if let navigationController = self.navigationController {
-//            
-//            // respond to swipe and hide/show
-//            navigationController.hidesBarsOnSwipe = true
-//            
-//            // get the pan gesture used to trigger hiding/showing the NavigationBar
-//            let panGestureRecognizer = navigationController.barHideOnSwipeGestureRecognizer
-//            
-//            // when the user pans, call action method to fade out title view
-//            panGestureRecognizer.addTarget(self, action:#selector(LatestPostsTableViewController.fadeOutTitleView(_:)))
-//        }
-//    }
-//    
-//    /**
-//     For fading out the title view
-//     - parameter sender: The UIPanGestureRecognizer when user swipes (and hides/shows NavigationBar))
-//     - returns: void
-//     */
-//    func fadeOutTitleView(sender: UIPanGestureRecognizer) {
-//        
-//        if let titleView = self.navigationItem.titleView {
-//            
-//            // fade out title view when swiping up
-//            let translation = sender.translationInView(self.view)
-//            
-//            if(translation.y < 0) {
-//                
-//                let alphaValue = 1 - abs(translation.y / titleView.frame.height)
-//                
-//                titleView.alpha = alphaValue
-//            }
-//            
-//            // clear transparency if the Navigation Bar is not hidden after swiping
-//            if let navigationController = self.navigationController {
-//                
-//                let navigationBar = navigationController.navigationBar
-//                
-//                if navigationBar.frame.origin.y > 0 {
-//                    
-//                    if let titleView = self.navigationItem.titleView {
-//                        
-//                        titleView.alpha = 1
-//                    }
-//                }
-//            }
-//        }
-//    }
-
 }

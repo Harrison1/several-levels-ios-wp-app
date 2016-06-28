@@ -20,6 +20,8 @@ class LatestPostsTableViewCell: UITableViewCell {
     
     @IBOutlet var mainView: UIView!
     
+    @IBOutlet var postPreview: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

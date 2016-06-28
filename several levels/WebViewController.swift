@@ -19,15 +19,13 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     var theBool: Bool = false
     var myTimer: NSTimer!
     
-    var titleShare: String = ""
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // set user agent
         NSUserDefaults.standardUserDefaults().registerDefaults(["UserAgent": "several-levels"])
         
+        navigationController?.navigationBarHidden = false
         navigationController?.toolbarHidden = false
         navigationController?.hidesBarsOnSwipe = true
         
