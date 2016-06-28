@@ -92,10 +92,10 @@ class LatestPostsTableViewController: UITableViewController {
             upperBorder.frame = CGRectMake(0, borderview.frame.size.height-1, borderview.frame.size.width, 1.0); borderview.layer .addSublayer(upperBorder);
             }
         
-        segmentedControl.items = ["WEEKLY", "MONTHLY", "YEARLY", "TWO"]
-        segmentedControl.font = UIFont(name: "Avenir-Black", size: 12)
+        segmentedControl.items = [UIImage(named: "home")!, UIImage(named: "tutorials")!, UIImage(named: "games")!, UIImage(named: "tech")!]
+    //    segmentedControl.font = UIFont(name: "Avenir-Black", size: 12)
         segmentedControl.borderColor = UIColor(white: 1.0, alpha: 0.3)
-        segmentedControl.selectedIndex = 1
+        segmentedControl.selectedIndex = 0
         segmentedControl.addTarget(self, action: #selector(LatestPostsTableViewController.filterSelect), forControlEvents: .ValueChanged)
         
         let segmentedC = UIBarButtonItem(customView: segmentedControl)

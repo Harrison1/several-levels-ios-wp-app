@@ -10,10 +10,10 @@ import UIKit
 
 @IBDesignable class CustomSegmentedControl: UIControl {
     
-    private var labels = [UILabel]()
+    private var labels = [UIImageView]()
     var thumbView = UIView()
     
-    var items: [String] = ["Item 1", "Item 2", "Item 3"] {
+    var items: [UIImage] = [UIImage(named: "home")!, UIImage(named: "tutorials")!, UIImage(named: "games")!, UIImage(named: "tech")!] {
         didSet {
             setupLabels()
         }
@@ -31,19 +31,19 @@ import UIKit
         }
     }
     
-    @IBInspectable var unselectedLabelColor : UIColor = UIColor.whiteColor() {
+    @IBInspectable var unselectedLabelColor : UIColor = UIColor.blueColor() {
         didSet {
             setSelectedColors()
         }
     }
     
-    @IBInspectable var thumbColor : UIColor = UIColor.whiteColor() {
+    @IBInspectable var thumbColor : UIColor = UIColor.redColor() {
         didSet {
             setSelectedColors()
         }
     }
     
-    @IBInspectable var borderColor : UIColor = UIColor.whiteColor() {
+    @IBInspectable var borderColor : UIColor = UIColor.greenColor() {
         didSet {
             layer.borderColor = borderColor.CGColor
         }
@@ -91,12 +91,12 @@ import UIKit
         
         for index in 1...items.count {
             
-            let label = UILabel(frame: CGRectMake(0, 0, 70, 40))
-            label.text = items[index - 1]
+            let label = UIImageView(frame: CGRectMake(0, 0, 50, 30))
+//            label.text = items[index - 1]
             label.backgroundColor = UIColor.clearColor()
-            label.textAlignment = .Center
-            label.font = UIFont(name: "Avenir-Black", size: 15)
-            label.textColor = index == 1 ? selectedLabelColor : unselectedLabelColor
+//            label.textAlignment = .Center
+//            label.font = UIFont(name: "Avenir-Black", size: 15)
+            label.tintColor = index == 1 ? selectedLabelColor : unselectedLabelColor
             label.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(label)
             labels.append(label)
@@ -141,11 +141,11 @@ import UIKit
     
     func displayNewSelectedIndex(){
         for (index, item) in labels.enumerate() {
-            item.textColor = unselectedLabelColor
+           // item.textColor = unselectedLabelColor
         }
         
         let label = labels[selectedIndex]
-        label.textColor = selectedLabelColor
+        //label.textColor = selectedLabelColor
         
         UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: [], animations: {
             
@@ -201,11 +201,11 @@ import UIKit
     
     func setSelectedColors(){
         for item in labels {
-            item.textColor = unselectedLabelColor
+       //     item.textColor = unselectedLabelColor
         }
         
         if labels.count > 0 {
-            labels[0].textColor = selectedLabelColor
+      //      labels[0].textColor = selectedLabelColor
         }
         
         thumbView.backgroundColor = thumbColor
@@ -213,7 +213,7 @@ import UIKit
     
     func setFont(){
         for item in labels {
-            item.font = font
+    //        item.font = font
         }
     }
 }
