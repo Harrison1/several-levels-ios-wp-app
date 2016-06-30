@@ -32,6 +32,9 @@ class LatestPostsTableViewController: UITableViewController {
     let loadingView = UIView()
     let spinner = UIActivityIndicatorView()
     let loadingLabel = UILabel()
+    let loadingImage = UIImageView()
+    let loadingName = UILabel()
+    let loadingMotto = UILabel()
     
     let customControl = UISegmentedControl(items: [UIImage(named: "home")!, UIImage(named: "tutorials")!, UIImage(named: "games")!, UIImage(named: "tech")!])
     
@@ -45,9 +48,6 @@ class LatestPostsTableViewController: UITableViewController {
         let frame = UIScreen.mainScreen().bounds
         customControl.frame = CGRectMake(0, 0, frame.width - 20, 34)
         
-        // Style the Segmented Control
-        //customSC.layer.cornerRadius = 5.0  // Don't let background bleed
-        //customSC.backgroundColor = UIColor.blackColor()
         customControl.tintColor = UIColor.whiteColor()
         
         customControl.addTarget(self, action: #selector(LatestPostsTableViewController.filterSelect), forControlEvents: .ValueChanged)
@@ -89,15 +89,6 @@ class LatestPostsTableViewController: UITableViewController {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
-    }
-    
-    func loadData() {
-        self.tableView.setContentOffset(CGPointZero, animated:false)
-        self.preventAnimation.removeAll()
-        self.getPosts(self.latestPosts, params: self.parameters)
-        self.tableView.reloadData()
-        navBarTitle.title = "several levels"
-        self.refreshControl?.endRefreshing()
     }
     
     func filterSelect() {
@@ -297,6 +288,9 @@ class LatestPostsTableViewController: UITableViewController {
         
         self.loadingLabel.hidden = false
         self.loadingView.hidden = false
+        self.loadingImage.hidden = false
+        self.loadingName.hidden = false
+        self.loadingMotto.hidden = false
         loadingView.layer.opacity = 1
         
         // Sets the view which contains the loading text and the spinner
@@ -306,6 +300,24 @@ class LatestPostsTableViewController: UITableViewController {
         let y = (self.tableView.frame.height / 2) - (self.navigationController?.navigationBar.frame.height)!
         loadingView.frame = CGRectMake(0, 0, width, height)
         loadingView.backgroundColor = UIColor.blackColor()
+        
+        // Sets loading image
+        self.loadingImage.frame = CGRectMake(30, 30, 100, 100)
+        self.loadingImage.image = UIImage(named: "home")
+        
+        // Sets loading text
+        self.loadingName.textColor = UIColor.whiteColor()
+        self.loadingName.textAlignment = NSTextAlignment.Center
+        self.loadingName.text = "several levels"
+        self.loadingName.font = UIFont.systemFontOfSize(30.0)
+        self.loadingName.frame = CGRectMake(0, 50, self.tableView.frame.width - 20, 50)
+        
+        // Sets loading text
+        self.loadingMotto.textColor = UIColor.whiteColor()
+        self.loadingMotto.textAlignment = NSTextAlignment.Center
+        self.loadingMotto.text = "we make and talk about software"
+        self.loadingMotto.frame = CGRectMake(0, 80, self.tableView.frame.width - 20, 50)
+        
         
         // Sets loading text
         self.loadingLabel.textColor = UIColor.whiteColor()
@@ -321,6 +333,8 @@ class LatestPostsTableViewController: UITableViewController {
         // Adds text and spinner to the view
         loadingView.addSubview(self.spinner)
         loadingView.addSubview(self.loadingLabel)
+        loadingView.addSubview(self.loadingName)
+        loadingView.addSubview(self.loadingMotto)
         
         self.tableView.addSubview(loadingView)
         
@@ -336,6 +350,7 @@ class LatestPostsTableViewController: UITableViewController {
         // Hides and stops the text and the spinner
         delay(1) {
             self.spinner.stopAnimating()
+            self.loadingImage.hidden = true
             self.loadingLabel.hidden = true
             self.loadingView.hidden = true
         }
