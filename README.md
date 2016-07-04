@@ -2,6 +2,8 @@
 ios app pulling wordpress posts from severallevels.io through the restful api
 Download the app here https://itunes.apple.com/us/app/several-levels/id1129649626?ls=1&mt=8 for iPhones running ios 9.3.
 
+app is using cocoapods with alamofire, swiftyjson, and sdwebimages
+
 ![Alt text](screenshot1.png)
 ![Alt text](screenshot2.png)
 ![Alt text](screenshot3.png)
